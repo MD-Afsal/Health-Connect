@@ -1,0 +1,38 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #97f5fb;
+    color: #05386b;
+    padding-top: 0%;
+}
+img{
+    width: 4%;
+    border-radius: 50%;
+    border-color: #05386b;
+    padding:1%;
+}
+header{
+    display: flex;
+    align-items: center;
+}
+.navi{
+    text-decoration: none;
+    padding: .3% 1% ;
+    font-size: 110%;
+    color: #05386b;
+    font-weight: bold;
+    border-style: solid;
+    border-radius: 16px;
+}
+.title{
+    border-width: 12cm;
+    border-color: #05386b;
+   
+}
+.navi:hover{
+ 
+    background-color:  #0f4f75;
+    color: #ffff;
+}
+.navi:active{
+    background-color: #edf5e1;
+}

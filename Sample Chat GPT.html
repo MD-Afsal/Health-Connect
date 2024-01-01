@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        #categoryInput {
+            margin: 10px 0;
+            padding: 5px;
+        }
+
+        #results {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hospital Finder</h1>
+
+    <label for="categoryInput">Select a category:</label>
+    <select id="categoryInput">
+        <option value="hospital">Hospital</option>
+        <option value="pharmacy">Pharmacy</option>
+        <!-- Add more categories as needed -->
+    </select>
+
+    <div id="map"></div>
+
+    <div id="results">
+        <h2>Results:</h2>
+        <ul id="placesList"></ul>
+    </div>
+
+    <script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 0, lng: 0 },
+                zoom: 2
+            });
+
+            const categoryInput = document.getElementById('categoryInput');
+            const placesList = document.getElementById('placesList');
+
+            categoryInput.addEventListener('change', function () {
+                const selectedCategory = categoryInput.value;
+                findPlaces(selectedCategory);
+            });
+
+            function findPlaces(category) {
+                const service = new google.maps.places.PlacesService(map);
+
+                service.nearbySearch({
+                    location: { lat: 0, lng: 0 },
+                    radius: 50000, // You can adjust the radius as needed
+                    type: category
+                }, (results, status) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        displayPlaces(results);
+                    } else {
+                        placesList.innerHTML = 'No results found';
+                    }
+                });
+            }
+
+            function displayPlaces(places) {
+                placesList.innerHTML = '';
+
+                places.forEach(place => {
+                    const li = document.createElement('li');
+                    li.textContent = place.name;
+                    placesList.appendChild(li);
+                });
+            }
+        }
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap">
+    </script>
+
+</body>
+</html>
