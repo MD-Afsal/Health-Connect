@@ -1,11 +1,12 @@
 body{
-    font-family: 'Times New Roman', Times, serif;
-    background-color: #97f5fb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('headerimage.jpg');
+    background-size: cover;
     color: #05386b;
     padding-top: 0%;
 }
 img{
-    width: 4%;
+    width: 3.5%;
     border-radius: 50%;
     border-color: #05386b;
     padding:1%;
@@ -16,12 +17,18 @@ header{
 }
 .navi{
     text-decoration: none;
-    padding: .3% 1% ;
-    font-size: 110%;
-    color: #05386b;
-    font-weight: bold;
+    padding-right: 12px ;
+    padding-left: 12px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+    font-size: 100%;
+    font-weight: 500;
+    text-align: center;
+    color: #f8f8f8;
     border-style: solid;
     border-radius: 16px;
+    background-color: #a1c8d4;
+    border-color: rgba(26, 110, 150, 0.76);
 }
 .title{
     border-width: 12cm;
@@ -30,7 +37,7 @@ header{
 }
 .navi:hover{
  
-    background-color:  #0f4f75;
+    background-color:  #2789a7;
     color: #ffff;
 }
 .navi:active{
