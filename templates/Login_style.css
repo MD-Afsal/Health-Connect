@@ -11,7 +11,7 @@ body{
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2,#c9d6ff);
 
-    
+    background-size: cover;
     display: flex;
     background-size: cover;
     align-items: center;
@@ -136,7 +136,7 @@ body{
 }
 
 .social-icons{
-    margin: 20px 0;
+    margin: 15px 0;
 }
 .social-icons a{
     border: 1px solid #ccc;
