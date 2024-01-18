@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="Login_style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Login_style.css') }}">
     <title>Login</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
     <div class="container" id="container">
         <div class="form-container sign-up">
             <form action="">
-                <h1>Create Account</h1><img src="logo.png" height="10%" width="20%">
+                <h1>Create Account</h1><img src="{{ url_for('static', filename='logo.png') }}" height="10%" width="20%">
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
@@ -30,7 +30,7 @@
         </div>
         <div class="form-container sign-in">
             <form action="">
-                <h1>Sign In</h1><img src="logo.png" height="10%" width="20%">
+                <h1>Sign In</h1><img src="{{ url_for('static', filename='logo.png') }}" height="10%" width="20%">
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
@@ -62,8 +62,7 @@
         </div>
     </div>
 
-    <script src="scriptLogin.js">
-
+    <script src="{{ url_for('static', filename='scriptLogin.js') }}"></script>
     </script>
 </body>
 </html>
