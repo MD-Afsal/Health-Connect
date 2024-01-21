@@ -5,10 +5,12 @@
     margin: 0;
     padding: 0;
     box-sizing: 0;
+    padding-top: 0.5;
 }
 body{
     font-family: 'Montserrat', sans-serif;
-    background-color: #f3f6ff;
+    /*background-color: #f3f6ff;*/
+    background: linear-gradient(90deg, #FFF 0%, rgba(212, 234, 255, 0.72) 27.49%, rgba(214, 233, 250, 0.73) 29.96%, rgba(172, 215, 255, 0.45) 59.39%, rgba(80, 169, 252, 0.45) 100%);
     /*background: linear-gradient(to right, #e2e2e2,#ffffff   );*/
     color: #05386b;
     padding-top: 0%;
@@ -47,6 +49,7 @@ header{
 .navi:active{
     background-color: #38383a;
 }
+
 .lable_container{
     padding: 3% 0;
     background-color: #05386b;
@@ -62,10 +65,3 @@ header{
     padding: 12px;
     letter-spacing: 2px;
 }
-.picflex{
-    height: 100px;
-    width: 100;
- }
- .picinline{
-    display:inline-block;
- }
