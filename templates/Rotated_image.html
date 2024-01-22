@@ -1,0 +1,33 @@
+<HTML>
+	<HEAD>
+		<TITLE>HEALTH CONNECT</TITLE>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+	</HEAD>
+	<BODY>
+		<header>
+			<img src="{{ url_for('static', filename='logo.png') }}">
+			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
+			<a class="navi" style="background-color: #05386bc9; color: #ffff;">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
+		</header>
+		<div class="lable">
+			<div  class="lable_container">
+				<h1>Find Hospital, Labs and Doctors near you</h1>
+				Here you can find top doctors, hospitals and diagnostic centers in your area
+				<h2>Select the Body part to suggest the Hospitals</h2>
+			</div>
+			<br>
+			<div style="padding-left: 45%;"><a href="{{ url_for('home')}}" style=" border: solid; border-radius: 12px; background-color: #05386b; text-decoration: none; padding: 4px; border-color: rgb(39, 39, 39); color: #ffff; font-size: 20px; ">Rotate Image</a></div>
+			<center>
+			<!-- Image Map Generated -->
+			<img src="{{ url_for('static', filename='') }}" usemap="#image-map">
+
+			<map name="image-map">
+				
+			</map>
+			</center>
+			
+		</div>
+	</BODY>
+</HTML>

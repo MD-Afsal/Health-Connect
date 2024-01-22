@@ -1,0 +1,40 @@
+<HTML>
+	<HEAD>
+		<TITLE>HEALTH CONNECT</TITLE>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+	</HEAD>
+	<BODY>
+		<header>
+			<img src="{{ url_for('static', filename='logo.png') }}">
+			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
+			<a class="navi" style="background-color: #05386bc9; color: #ffff;">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
+		</header>
+        <div>
+            <div class="lable">
+                <div  class="lable_container">
+                    <h2 for="dropdown">Select the catergory to find the Hospital</h2>
+                    <!--<select class="dropdown" name="catergory">
+                        <option value="">Neurologist</option>
+                        <option value="">Hair</option>
+                    </select>
+                    -->
+                    <div class="dropdown">
+                        <button>Select catergory</button>
+                        <div class="dropdown-content">
+                            <a href="#">Neurologist(Brain)</a>
+                            <a href="#">Dental(Teeth)</a>
+                            <a href="#">ENT Speclist(Ear,Nose,Tongue)</a>
+                            <a href="#">Eye doctors</a>
+                            <a href="#">Skin Doctor</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>  
+            <img src="{{ url_for('static', filename='') }}">  
+        </div>
+
+    </BODY>
+</HTML>    

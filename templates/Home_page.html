@@ -9,7 +9,7 @@
 		<header>
 			<img src="{{ url_for('static', filename='logo.png') }}">
 			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
-			<a class="navi" href="Home" style="background-color: #05386bc9; color: #ffff;">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
+			<a class="navi" style="background-color: #05386bc9; color: #ffff;">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
 		</header>
 		<div class="lable">
 			<div  class="lable_container">
@@ -17,12 +17,14 @@
 				Here you can find top doctors, hospitals and diagnostic centers in your area
 				<h2>Select the Body part to suggest the Hospitals</h2>
 			</div>
+			<br>
+			<div style="padding-left: 45%;"><a href="{{ url_for('rotated_image') }}" style=" border: solid; border-radius: 12px; background-color: #05386b; text-decoration: none; padding: 4px; border-color: rgb(39, 39, 39); color: #ffff; font-size: 20px; ">Rotate Image</a></div>
 			<center>
 			<!-- Image Map Generated -->
 			<img src="{{ url_for('static', filename='humanFont.png') }}" usemap="#image-map">
 
 			<map name="image-map">
-				<area target="" alt="LeftHand" title="LeftHand" href="#hand.html" coords="158,582,151,604,131,635,126,660,119,659,112,637,106,660,98,667,87,660,78,651,70,641,66,619,80,593,100,571,134,548,175,489,213,436,235,392,253,350,255,314,262,288,279,262,307,251,326,248,320,277,312,306,310,339,311,364,308,384,295,407,278,437,268,462,240,497,202,533" shape="poly">
+				<area target="parent" alt="LeftHand" title="LeftHand" href="{{ url_for('static', filename='hand.html')}}" coords="158,582,151,604,131,635,126,660,119,659,112,637,106,660,98,667,87,660,78,651,70,641,66,619,80,593,100,571,134,548,175,489,213,436,235,392,253,350,255,314,262,288,279,262,307,251,326,248,320,277,312,306,310,339,311,364,308,384,295,407,278,437,268,462,240,497,202,533" shape="poly">
 				<area target="" alt="rightHand" title="rightHand" href="#hand.html" coords="720,532,731,544,756,551,769,568,780,584,792,601,795,615,792,627,784,635,779,644,766,650,754,631,746,621,746,640,739,648,731,620,717,606,706,582,698,563,682,550,639,516,607,485,571,439,549,401,535,379,531,362,529,339,527,317,529,298,529,277,528,258,528,247,547,252,577,279,583,296,588,324,593,346,610,386" shape="poly">
 				<area target="" alt="Head" title="Head" href="#head.html" coords="416,50,394,54,381,68,371,81,369,98,367,116,360,123,358,141,366,160,373,168,381,179,379,193,379,204,371,225,360,233,341,241,331,244,360,252,379,254,392,254,408,256,427,258,444,254,466,254,485,252,500,248,514,244,481,237,464,227,454,210,456,193,458,173,458,162,462,150,467,158,475,148,475,137,471,123,464,112,466,94,458,77,446,62,431,52" shape="poly">
 				<area target="" alt="Cheast" title="Cheast" href="#chest.html" coords="326,245,324,258,322,270,319,283,313,302,312,315,311,329,311,346,313,358,325,363,343,366,359,367,380,362,395,360,411,357,423,360,446,361,476,367,497,364,511,358,524,354,527,339,525,321,528,301,528,280,525,259,524,245,512,245,468,254,431,257,412,257,389,254,363,253" shape="poly">
@@ -31,6 +33,7 @@
 				<area target="" alt="rightLeg" title="rightLeg" href="#leg.html" coords="424,662,421,685,419,714,423,741,425,773,427,801,427,833,431,876,435,915,430,947,425,991,430,1025,435,1073,438,1098,433,1133,426,1163,421,1179,430,1197,443,1205,457,1216,470,1233,489,1237,508,1241,519,1232,519,1218,492,1197,479,1173,470,1144,478,1103,487,1052,495,1012,499,981,498,941,499,912,502,856,511,825,527,758,534,702,526,629,517,582,510,542,498,549,480,569,465,593" shape="poly">
 			</map>
 			</center>
+			
 		</div>
 	</BODY>
 </HTML>
