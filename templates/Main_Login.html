@@ -25,7 +25,8 @@
                 <input type="text" placeholder="Name">
                 <input type="email" placeholder="Email">
                 <input type="password" placeholder="Password">
-                <button>Sign Up</button>
+                <!-- Sign up button -->
+                <button id="sign-up-button" href="{{ url_for('home') }}">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">
@@ -43,7 +44,8 @@
                 <input type="email" placeholder="Email">
                 <input type="password" placeholder="Password">
                 <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
+                <!-- On process Need to check the navogation -->
+                <button href="{{ url_for('home') }}">Sign In</button>
             </form>
         </div>
         <div class="toggle-container">
