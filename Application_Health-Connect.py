@@ -1,9 +1,14 @@
 from flask import Flask, render_template
-from flask_mysaldb import MySQL
+import mysql.connector
 
 app = Flask(__name__)
-
-@app.config['MYSQL_HOST'] = 'localhost'
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="Admin93@"
+)
+# print("___-------____")
+print(mydb)
 
 @app.route('/')
 def login():
