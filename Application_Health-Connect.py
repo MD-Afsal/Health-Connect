@@ -1,14 +1,14 @@
 from flask import Flask, render_template
 import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="Admin93@",
-  database="healthcon"
-)
-
 app = Flask(__name__)
+
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="HealthCon"
+)
 
 
 @app.route('/')
