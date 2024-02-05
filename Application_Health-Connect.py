@@ -1,18 +1,19 @@
 from flask import Flask, render_template
-import mysql.connector 
+import mysql.connector
 
-app = Flask(__name__)
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="Samsung753"
+  password="Admin93@",
+  database="healthcon"
 )
-# print("___-------____")
-print(mydb)
+
+app = Flask(__name__)
+
 
 @app.route('/')
 def login():
-    return render_template('Home_page.html')
+    return render_template('Rotated_image.html')
 
 
 # first we need to redirect to the data upload page
