@@ -11,7 +11,7 @@
     
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form action="">
+            <form name="signForm" action="/signup" method="post">
                 <h1>Create Account</h1><img src="{{ url_for('static', filename='logo.png') }}" height="10%" width="20%">
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -22,15 +22,15 @@
                 <span>
                     or use your email for registration
                 </span>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+                <input type="text" placeholder="Name" id="iduser">
+                <input type="email" placeholder="Email" id="idemail">
+                <input type="password" placeholder="Password" id="idpass">
                 <!-- Sign up button -->
-                <button id="sign-up-button" href="{{ url_for('home') }}">Sign Up</button>
+                <button id="sign-up-button">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">
-            <form action="">
+            <form name="signForm" action="/signup" method="post">
                 <h1>Sign In</h1><img src="{{ url_for('static', filename='logo.png') }}" height="10%" width="20%">
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -44,8 +44,8 @@
                 <input type="email" placeholder="Email">
                 <input type="password" placeholder="Password">
                 <a href="#">Forgot your password?</a>
-                <!-- On process Need to check the navogation -->
-                <button href="{{ url_for('home') }}">Sign In</button>
+                <!-- On process Need to check the navigation -->
+                <button>Sign In</button>
             </form>
         </div>
         <div class="toggle-container">
@@ -53,11 +53,13 @@
                 <div class="toggle-panel toggle-left">
                     <h1>Welcome Back!</h1>
                     <p>Enter your personal details to use all of the site features</p>
+                     <!--Signin btn for toggle -->
                     <button class="hidden" id="login">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Hello, Friends!</h1>
                     <p>Register your personal details to use all of the site features</p>
+                    <!--Signup btn for toggle -->
                     <button class="hidden" id="register">Sign Up</button>
                 </div>
             </div>
