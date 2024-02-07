@@ -1,6 +1,5 @@
-from flask import Flask, redirect, url_for, render_template, request
 import mysql.connector
-
+from flask import Flask, render_template, request, url_for, redirect
 
 app = Flask(__name__)
 
@@ -11,6 +10,7 @@ mydb = mysql.connector.connect(
     database="HealthCon"
 )
 mycursor = mydb.cursor()
+
 
 @app.route('/')
 def index():
@@ -30,9 +30,15 @@ def signup():
         return redirect(url_for('home'))
     return redirect(url_for('index'))
 
+
 @app.route('/home')
 def home():
     return render_template('main.html')
+
+
+@app.route('/backpose')
+def rotateimg():
+    return render_template('rotateimg.html')
 
 
 if __name__ == '__main__':

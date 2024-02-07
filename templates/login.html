@@ -11,7 +11,7 @@
     
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form name="signForm" action="/signup" method="post">
+            <form name="signupForm" action="/signup" method="post">
                 <h1>Create Account</h1><img src="{{ url_for('static', filename='logo.png') }}" height="10%" width="20%">
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -22,15 +22,15 @@
                 <span>
                     or use your email for registration
                 </span>
-                <input type="text" placeholder="Name" id="iduser">
-                <input type="email" placeholder="Email" id="idemail">
-                <input type="password" placeholder="Password" id="idpass">
+                <input type="text" placeholder="Name" name="iduser">
+                <input type="email" placeholder="Email" name="idemail">
+                <input type="password" placeholder="Password" name="idpass">
                 <!-- Sign up button -->
                 <button id="sign-up-button">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">
-            <form name="signForm" action="/signup" method="post">
+            <form name="signinForm" action="/signin" method="post">
                 <h1>Sign In</h1><img src="{{ url_for('static', filename='logo.png') }}" height="10%" width="20%">
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -44,7 +44,6 @@
                 <input type="email" placeholder="Email">
                 <input type="password" placeholder="Password">
                 <a href="#">Forgot your password?</a>
-                <!-- On process Need to check the navigation -->
                 <button>Sign In</button>
             </form>
         </div>
