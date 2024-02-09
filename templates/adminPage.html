@@ -15,8 +15,22 @@
     <div class="lable">
         <div  class="lable_container">
             <h1>Admin Page</h1>
-          
-        </div>
+            <form class="input_container" action="/adminPage">
+                <input type="text" name="doc_name" id="txt_docname">
+                <select name="doc_cat" id="cmb_category">
+                    <option value="cat1">General Doctor</option>
+                </select>
+                <select name="doc_dict" id="cmb_district">
+                    <option value="dict1">Tirunelveli</option>
+                </select>
+                <input type="text" name="doc_city" id="txt_city">
+                <input type="text" name="doc_addr" id="txt_address">
+                <input type="text" name="doc_hos" id="txt_hospital">
+                <input type="number" name="doc_num" id="txt_phone">
+                <input type="time" name="doc_time_in" id="time_IN">
+                <input type="time" name="doc_time_out" id="time_OUT">
+            </form>
+        </div> 
     <HR>
     <h2></h2>
 </body>

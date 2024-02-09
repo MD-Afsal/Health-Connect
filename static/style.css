@@ -123,3 +123,12 @@ button{
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+
+/*CSS Made by Akash*/
+
+.input_container{
+    margin: auto;
+    margin-top: ;
+    display: grid;
+}
