@@ -17,14 +17,14 @@ def index():
     return render_template('login.html')
 
 
-@app.route('/signup',methods=['POST' ,'GET'])
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
         user = request.form['iduser']
         pasw = request.form['idpass']
         email = request.form['idemail']
         sql = "insert into login(user,pass,email) values(%s,%s,%s)"
-        val = (user,pasw,email)
+        val = (user, pasw, email)
         mycursor.execute(sql, val)
         mydb.commit()
         return redirect(url_for('home'))
