@@ -1,7 +1,8 @@
 import mysql.connector
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 
 app = Flask(__name__)
+app.secret_key = '1234'
 
 mydb = mysql.connector.connect(
     host="localhost",
@@ -14,10 +15,12 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
+    if 'user' in session:
+        return redirect(url_for('home'))
     return render_template('login.html')
 
 
-@app.route('/signup',methods=['POST' ,'GET'])
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
         user = request.form['iduser']
@@ -28,6 +31,22 @@ def signup():
         mycursor.execute(sql, val)
         mydb.commit()
         return redirect(url_for('home'))
+    return redirect(url_for('index'))
+
+
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    if request.method == 'POST':
+        username = request.form['emailId']
+        password = request.form['passwordId']
+        mycursor.execute("SELECT * FROM login WHERE user=%s AND pass=%s", (username, password))
+        user = mycursor.fetchone()
+        if user:
+            session['user'] = username
+            return redirect(url_for('home'))
+        else:
+            msg = "Incorrect user or password!"
+            return render_template('login.html', msg=msg)
     return redirect(url_for('index'))
 
 

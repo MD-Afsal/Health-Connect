@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect,session
 
 app = Flask(__name__)
 
@@ -15,6 +15,30 @@ mycursor = mydb.cursor()
 @app.route('/')
 def index():
     return render_template('login.html')
+
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    session['text'] = ""
+    session['trans'] = ""
+    session['lang'] = ""
+    msg = ''
+    if request.method == 'POST' and 'txt_user' in request.form and 'txt_pass' in request.form:
+        username = request.form['txt_user']
+        password = request.form['txt_pass']
+        cursor = mysql.connection.cursor(mydb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM tbl_signup WHERE username = % s AND password = % s', (username, password,))
+        account = cursor.fetchone()
+        if account:
+            session['loggedin'] = True
+            session['id'] = account['id']
+            session['username'] = account['username']
+            session['email'] = account['email']
+            session['password'] = account['password']
+            return render_template('home.html', user=session.get('username'), email=session['email'],
+                                   pasw=session['password'])
+        else:
+            msg = 'Incorrect username / password !'
+    return render_template('signin.html', msg=msg)
 
 
 @app.route('/insert_rec', methods=['POST', 'GET'])

@@ -30,7 +30,7 @@
             </form>
         </div>
         <div class="form-container sign-in">
-            <form name="signinForm" action="/signin" method="post">
+            <form name="signinForm" action="{{ url_for('signin')}}" method="post">
                 <h1>Sign In</h1><img src="{{ url_for('static', filename='logo.png') }}" height="10%" width="20%">
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -41,8 +41,9 @@
                 <span>
                     or use your email password
                 </span>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+                <input type="text" placeholder="Username or email" name="emailId">
+                <input type="password" placeholder="Password" name="passwordId">
+                <h4 style="color: red;">{{msg}}</h4>
                 <a href="#">Forgot your password?</a>
                 <button>Sign In</button>
             </form>
