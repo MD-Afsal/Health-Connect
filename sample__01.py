@@ -6,7 +6,7 @@ app = Flask(__name__)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="",
+    password="Admin93@",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -14,7 +14,7 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    return render_template('adminPage.html')
+    return render_template('login.html')
 
 
 @app.route('/insert_rec', methods=['POST', 'GET'])
