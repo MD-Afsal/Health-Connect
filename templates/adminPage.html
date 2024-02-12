@@ -17,16 +17,31 @@
             <h1>Admin Page</h1>
         </div>    <HR>
 
-        <form class="input_container" action="/insert_rec" method="post">
+        <form action="/insert_rec" class="input_container" enctype="multipart/form-data" method="post">
             <label for="doc_name">Doctor Name</label>
             <input type="text" name="doc_name" id="txt_docname">
+            <label for="doc_img">Doctor Photo</label>
+            <input type="file" name="doc_img" accept="image/*">
             <label for="doc_cat">Doctor Category</label>
             <select name="doc_cat" id="cmb_category">
-                <option value="cat1">General Doctor</option>
+                <option value="General doctor">General doctor</option>
+                <option value="Dental">Dental</option>
+                <option value="Cardiologist">Cardiologist</option>
+                <option value="Paediatricians">Paediatricians</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="ENT">ENT(Ears, Nose and Throat)</option>
+                <option value="Physiotherapy">Physiotherapy</option>
+                <option value="Nephrologist">Nephrologist</option>
+                <option value="Urologist">Urologist</option>
+                <option value="Asthma">Asthma</option>
+                <option value="Gastroenterologist">Gastroenterologist</option>
+                <option value="Skin doctor">Skin doctor</option>
             </select>
             <label for="doc_dict">District</label>
             <select name="doc_dict" id="cmb_district">
-                <option value="dict1">Tirunelveli</option>
+                <option value="Tirunelveli">Tirunelveli</option>
+                <option value="Thoothukudi">Thoothukudi</option>
+                <option value="Tenkasi">Tenkasi</option>
             </select>
             <label for="doc_city">City</label>
             <input type="text" name="doc_city" id="txt_city">

@@ -1,0 +1,168 @@
+<html>
+<head>
+<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<!--[if IE]>
+<script src="http://goo.gl/r57ze"></script>
+<![endif]-->
+</head>
+<body>
+<input type='file' onchange="readURL(this);" />
+<img id="blah" src="#" alt="your image" />
+</body>
+</html>
+
+//input for the image
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#blah')
+        .attr('src', e.target.result)
+        .width(150)
+        .height(200);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+
+//preview the image
+function previewFile() {
+  var preview = document.querySelector('img');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
+
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  }
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+
+<input type="file" onchange="previewFile()"><br>
+<img src="" height="200" alt="Image preview...">
+
+
+
+//python program to store the image
+import mysql.connector
+
+# Connect to your MySQL database
+connection = mysql.connector.connect(
+    host="your_host",
+    user="your_user",
+    password="your_password",
+    database="your_database"
+)
+cursor = connection.cursor()
+
+# Read the image file as binary
+with open('path/to/your/image.jpg', 'rb') as file:
+    image_data = file.read()
+
+# Insert the image data into the database
+query = "INSERT INTO your_table (image_column) VALUES (%s)"
+cursor.execute(query, (image_data,))
+
+# Commit the transaction
+connection.commit()
+
+# Close the connection
+cursor.close()
+connection.close()
+
+
+//python program to retrive the image
+import mysql.connector
+from PIL import Image
+from io import BytesIO
+
+# Connect to the database
+connection = mysql.connector.connect(
+    host="your_host",
+    user="your_user",
+    password="your_password",
+    database="your_database"
+)
+cursor = connection.cursor()
+
+# Retrieve the image data from the database
+query = "SELECT image_column FROM your_table WHERE your_condition"
+cursor.execute(query)
+image_data = cursor.fetchone()[0]
+
+# Convert the binary data back to an image
+image = Image.open(BytesIO(image_data))
+image.show()
+
+# Close the connection
+cursor.close()
+connection.close()
+
+__________________________________________________________________________________
+
+
+# app.py
+from flask import Flask, render_template, request
+import mysql.connector
+
+app = Flask(__name__)
+
+# MySQL connection
+connection = mysql.connector.connect(
+    host='your_mysql_host',
+    user='your_mysql_user',
+    password='your_mysql_password',
+    database='your_database_name'
+)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'image' in request.files:
+        image = request.files['image']
+        image_path = f"uploads/{image.filename}"
+        image.save(image_path)
+
+        cursor = connection.cursor()
+        insert_query = 'INSERT INTO images (image_path) VALUES (%s)'
+        cursor.execute(insert_query, (image_path,))
+        connection.commit()
+        cursor.close()
+
+        return 'Image uploaded successfully!'
+    return 'Image upload failed.'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+</head>
+<body>
+    <h1>Image Upload</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
+
