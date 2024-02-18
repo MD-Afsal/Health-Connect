@@ -165,4 +165,72 @@ if __name__ == '__main__':
     </form>
 </body>
 </html>
+-----------------------------------------------
+CREATE TABLE images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    image_data MEDIUMBLOB
+);
 
+from flask import Flask, render_template, send_file
+import mysql.connector
+
+app = Flask(__name__)
+
+# MySQL Configuration
+db_config = {
+    'host': 'your_mysql_host',
+    'user': 'your_mysql_user',
+    'password': 'your_mysql_password',
+    'database': 'your_mysql_database'
+}
+
+# Establish MySQL connection
+db = mysql.connector.connect(**db_config)
+
+
+@app.route('/image/<int:image_id>')
+def get_image(image_id):
+    cursor = db.cursor(dictionary=True)
+    query = "SELECT name, image_data FROM images WHERE id = %s"
+    cursor.execute(query, (image_id,))
+    image = cursor.fetchone()
+    cursor.close()
+
+    if image:
+        return render_template('image.html', image=image)
+    else:
+        return "Image not found", 404
+
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+</head>
+<body>
+
+    <h2>{{ image.name }}</h2>
+
+    <img src="{{ url_for('serve_image', image_id=image.id) }}" alt="{{ image.name }}">
+
+</body>
+</html>
+
+---
+@app.route('/image/<int:image_id>/serve')
+def serve_image(image_id):
+    cursor = db.cursor(dictionary=True)
+    query = "SELECT image_data FROM images WHERE id = %s"
+    cursor.execute(query, (image_id,))
+    image = cursor.fetchone()
+    cursor.close()
+
+    if image:
+        return send_file(io.BytesIO(image['image_data']),
+                         mimetype='image/jpeg', as_attachment=True,
+                         download_name=f"{image_id}.jpg")
+    else:
+        return "Image not found", 404
