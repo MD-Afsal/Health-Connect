@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, Response
 
 app = Flask(__name__)
 
@@ -14,32 +14,33 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    return redirect(url_for('insert_rec'))
+    return render_template('page_div.html')
 
+
+@app.route('/head')
+def head():
+    return render_template('head.html')
+
+
+@app.route('/backpose')
+def rotateimg():
+    return render_template('rotateimg.html')
 
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
-    session['text'] = ""
-    session['trans'] = ""
-    session['lang'] = ""
-    msg = ''
-    if request.method == 'POST' and 'txt_user' in request.form and 'txt_pass' in request.form:
-        username = request.form['txt_user']
-        password = request.form['txt_pass']
-        cursor = mysql.connection.cursor(mydb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM tbl_signup WHERE username = % s AND password = % s', (username, password,))
-        account = cursor.fetchone()
-        if account:
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
-            session['email'] = account['email']
-            session['password'] = account['password']
-            return render_template('home.html', user=session.get('username'), email=session['email'],
-                                   pasw=session['password'])
+    if request.method == 'POST':
+        username = request.form['emailId']
+        password = request.form['passwordId']
+        mycursor.execute("SELECT * FROM login WHERE user=%s AND pass=%s", (username, password))
+        user = mycursor.fetchone()
+        if user:
+            session['user'] = request.form.get('user')
+            return redirect(url_for('home'))
         else:
-            msg = 'Incorrect username / password !'
-    return render_template('signin.html', msg=msg)
+            msg = "Incorrect user or password!"
+            return render_template('login.html', msg=msg)
+    return redirect(url_for('index'))
+
 
 
 @app.route('/insert_rec', methods=['POST', 'GET'])

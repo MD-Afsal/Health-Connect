@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, Response
 from flask_session import Session
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ Session(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Admin93@",
+    password="",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -18,7 +18,7 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    if not session['user']:
+    if not session.get('name'):
         return render_template('login.html')
     return render_template('main.html')
 
@@ -29,10 +29,11 @@ def signup():
         user = request.form['iduser']
         pasw = request.form['idpass']
         email = request.form['idemail']
-        sql = "insert into login(user,pass,email) values(%s,%s,%s)"
+        sql = "insert into tbl_login(username,password,email) values(%s,%s,%s)"
         val = (user, pasw, email)
         mycursor.execute(sql, val)
         mydb.commit()
+        session['user'] = request.form.get('user')
         return redirect(url_for('home'))
     return redirect(url_for('index'))
 
@@ -42,15 +43,24 @@ def signin():
     if request.method == 'POST':
         username = request.form['emailId']
         password = request.form['passwordId']
-        mycursor.execute("SELECT * FROM login WHERE user=%s AND pass=%s", (username, password))
+        mycursor.execute("SELECT * FROM tbl_login WHERE username=%s AND password=%s", (username, password))
         user = mycursor.fetchone()
         if user:
-            session['user'] = request.form['emailId']
+            session['user'] = request.form.get('user')
             return redirect(url_for('home'))
         else:
             msg = "Incorrect user or password!"
             return render_template('login.html', msg=msg)
     return redirect(url_for('index'))
+
+
+# image retrival using id
+@app.route('/image/<int:image_id>')
+def get_image(image_id):
+    mycursor.execute("SELECT doc_img FROM tbl_docter WHERE id = %s", (image_id,))
+    image_data = mycursor.fetchone()[0]
+    # mycursor.close()
+    return Response(image_data, mimetype='image/jpeg')  # Adjust mimetype based on your image type
 
 
 @app.route('/home')
