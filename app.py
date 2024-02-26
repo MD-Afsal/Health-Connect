@@ -93,7 +93,7 @@ def insert_rec():
 
         mycursor.execute(sql, val)
         mydb.commit()
-        return render_template('adminPage.html')
+    return render_template('adminPage.html')
     
 
 if __name__ == '__main__':

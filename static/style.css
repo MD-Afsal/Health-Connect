@@ -206,3 +206,22 @@ input[type=submit]:active{
     transform: scale(-2);
     transition: 0.5s;
 }
+
+input[type=radio]{
+    width: auto;
+    height: auto;
+    margin: auto;
+    outline: none;
+    font-size: 17px;
+    font-weight: 600;
+    
+}
+
+.adminpageselection{
+    padding: 12px;
+    margin: auto;
+    border-style: solid;
+    background-color: aliceblue;
+    color: black;
+    border-radius: 12px;
+}

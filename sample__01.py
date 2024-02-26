@@ -14,7 +14,7 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    return render_template('page_div.html')
+    return render_template('adminPage.html')
 
 
 @app.route('/head')

@@ -234,3 +234,47 @@ def serve_image(image_id):
                          download_name=f"{image_id}.jpg")
     else:
         return "Image not found", 404
+
+
+
+------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Inputs</title>
+</head>
+<body>
+
+    <form id="myForm">
+        <label>
+            <input type="radio" name="inputType" value="text" onclick="changeInputs('text')"> Text Input
+        </label>
+        <label>
+            <input type="radio" name="inputType" value="number" onclick="changeInputs('number')"> Number Input
+        </label>
+        <br>
+        
+        <div id="inputContainer">
+            <!-- Dynamic inputs will be inserted here -->
+        </div>
+    </form>
+
+    <script>
+        function changeInputs(inputType) {
+            var inputContainer = document.getElementById('inputContainer');
+            inputContainer.innerHTML = ''; // Clear previous inputs
+
+            if (inputType === 'text') {
+                inputContainer.innerHTML = '<label>Text Input: <input type="text" name="textInput"></label>';
+            } else if (inputType === 'number') {
+                inputContainer.innerHTML = '<label>Number Input: <input type="number" name="numberInput"></label>';
+            }
+            // You can add more conditions for other input types as needed
+        }
+    </script>
+
+</body>
+</html>
