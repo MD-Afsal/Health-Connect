@@ -86,19 +86,14 @@ def insert_rec():
 def insert_user_rec():
     if request.method == 'POST':
         # on process and we need to convert the code to user input
-        user_name = request.form['username']
-        image = request.files['doc_img']
+        user_name = request.form['user_name']
+        image = request.files['']
         image_data = image.read()
         image_path = f"uploads/{image.filename}"
-
-        category = request.form['doc_cat']
-        district = request.form['doc_dict']
-        city = request.form['doc_city']
-        address = request.form['doc_addr']
-        hospital_name = request.form['doc_hos']
-        phone = request.form['doc_num']
-        time_in = request.form['doc_time_in']
-        time_out = request.form['doc_time_out']
+        district = request.form['']
+        city = request.form['']
+        address = request.form['']
+        phone = request.form['']
 
         sql = ""
 
