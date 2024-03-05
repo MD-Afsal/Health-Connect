@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}">
+        <h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
+        <a class="navi">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" style="background-color: #05386bc9; color: #ffff;" href="#about">About</a>
+    </header>
+    <div class="lable">
+        <div  class="lable_container">
+            <h1>Admin Page</h1>
+        </div>    <HR>
+        <form action="" class="input_container" id="AdminForm" enctype="multipart/form-data" method="post">
+            <div style="padding: 6px 40px;
+            margin: auto;
+            border-style: solid;
+            background-color: aliceblue;
+            color: black;
+            border-radius: 12px;">                
+                <h3 >Edit Your Profile</h3>
+            </div>
+            <label for="username">Edit your username</label>
+            <input type="text" name="username" id="user">
+            <br>
+            <input type="submit" value="Update">
+        </form>
+    </div> 
+    <br>
+</body>
+</html>
+  

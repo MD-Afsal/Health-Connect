@@ -84,24 +84,18 @@ def insert_rec():
 # for user input action (admin page)
 @app.route('/insert_user_rec', methods=['POST', 'GET'])
 def insert_user_rec():
+    global msg
     if request.method == 'POST':
         # on process and we need to convert the code to user input
         user_name = request.form['user_name']
-        image = request.files['']
-        image_data = image.read()
-        image_path = f"uploads/{image.filename}"
-        district = request.form['']
-        city = request.form['']
-        address = request.form['']
-        phone = request.form['']
-
-        sql = ""
-
-        val = ()
-
-        mycursor.execute(sql, val)
-        mydb.commit()
-    return render_template('adminPage.html')
+        user_pass = request.form['user_pass']
+        mycursor.execute("SELECT * FROM tbl_login WHERE username=%s AND password=%s", (user_name, user_pass))
+        user = mycursor.fetchone()
+        if user:
+            return render_template('userAccountModificationPage.html')    # create function for user modification in user profile
+        else:
+            msg = "Incorrect user or password!"
+    return render_template('adminPage.html', msg=msg)
 
 @app.route('/upload', methods=['POST'])
 def upload():
