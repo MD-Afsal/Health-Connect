@@ -284,5 +284,9 @@ def serve_image(image_id):
 >>>>> Mysql Table <<<<<<<
 
 1. tbl_login(id,username,email,password)
-2. tbl_doctor_details(id, doc_name, category, district, city, address, hospital_name, phone, time_IN, time_OUT)
-2. tbl_user_details(id, name, age, gender, blood_group, )
+2. tbl_doctor_details(id, doc_name, doc_img, doc_img_path, category, district, city, address, hospital_name, phone, time_IN, time_OUT)
+3. tbl_user_details(id, name, user_img, age, gender, blood_group, affected_with)
+4. tbl_user_address(id, addr, city, district, state, country)
+5. tbl_doctor_images(id, doc_pic1, doc_pic2, doc_pic3, doc_pic4, doc_pic5, doc_pic6)
+6. tbl_user_medicalreport_images(id, rep1, rep2, rep3, rep4, rep5, rep6, rep7, rep8, rep9, rep10)
+7. tbl_user_medicalbill_images(id, bill1, bill2, bill3, bill4, bill5, bill6, bill7, bill8, bill9, bill10)
