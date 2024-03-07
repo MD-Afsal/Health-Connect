@@ -14,7 +14,7 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    return render_template('page_div.html')
+    return render_template('adminPage.html')
 
 
 @app.route('/head')
@@ -43,7 +43,7 @@ def signin():
 
 
 
-@app.route('/insert_rec', methods=['POST', 'GET'])
+@app.route('/insert_doctor_rec', methods=['POST', 'GET'])
 def insert_rec():
     if request.method == 'POST':
         doc_name = request.form['doc_name']
@@ -80,6 +80,22 @@ def insert_rec():
         mydb.commit()
     return render_template('adminPage.html')
 
+
+# for user input action (admin page)
+@app.route('/insert_user_rec', methods=['POST', 'GET'])
+def insert_user_rec():
+    global msg
+    if request.method == 'POST':
+        # on process and we need to convert the code to user input
+        user_name = request.form['user_name']
+        user_pass = request.form['user_pass']
+        mycursor.execute("SELECT * FROM tbl_login WHERE username=%s AND password=%s", (user_name, user_pass))
+        user = mycursor.fetchone()
+        if user:
+            return render_template('userAccountModificationPage.html')    # create function for user modification in user profile
+        else:
+            msg = "Incorrect user or password!"
+    return render_template('adminPage.html', msg=msg)
 
 @app.route('/upload', methods=['POST'])
 def upload():
