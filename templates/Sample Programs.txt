@@ -234,3 +234,11 @@ def serve_image(image_id):
                          download_name=f"{image_id}.jpg")
     else:
         return "Image not found", 404
+
+
+-----------------------------------------------
+>>>>> Mysql Table <<<<<<<
+
+1. tbl_login(id,username,email,password)
+2. tbl_doctor_details(id, doc_name, category, district, city, address, hospital_name, phone, time_IN, time_OUT)
+2. tbl_user_details(id, name, age, gender, blood_group, )

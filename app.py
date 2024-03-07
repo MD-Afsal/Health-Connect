@@ -10,7 +10,7 @@ Session(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="",
+    password="Admin93@",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -21,6 +21,7 @@ def index():
     if not session.get('name'):
         return render_template('login.html')
     return render_template('main.html')
+
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -93,7 +94,7 @@ def insert_rec():
 
         mycursor.execute(sql, val)
         mydb.commit()
-        return render_template('adminPage.html')
+    return render_template('adminPage.html')
     
 
 if __name__ == '__main__':
