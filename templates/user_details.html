@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+			<img src="{{ url_for('static', filename='logo.png') }}">
+			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
+			<a class="navi" style="background-color: #05386bc9; color: #ffff;">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
+		</header>
+
+        <main>
+            <section>
+                <form action="" method="post" class="input_container">
+                    <label for="txt_name">Name</label>
+                    <input type="text" name="txt_name">
+                    <label for="txt_img">Image</label>
+                    <input type="file" name="txt_img" id="" accept="image/*">
+                    <label for="txt_age">Age</label>
+                    <input type="number" name="txt_age" id="">
+                    <label for="dd_gender">Gender</label>
+                    <select name="dd_gender" id="">
+                        <option value="">Male</option>
+                        <option value="">Female</option>
+                        <option value="">Others</option>
+                    </select>
+                    <label for="txt_blood">Blood Group</label>
+                    <input type="text" name="txt_blood" placeholder="Eg : A+">
+                    <label for="dd_affected_with">Affected With</label>
+                    <select name="dd_affected_with" id="">
+                        <option value="">Cardiovascular Diseases</option>
+                        <option value="">Diabetes</option>
+                        <option value="">Respiratory diseases</option>
+                        <option value="">Tuberculosis</option>
+                        <option value="">Malaria</option>
+                        <option value="">Diarrhoea</option>
+                        <option value="">Stroke</option>
+                        <option value="">Hepatitis</option>
+                        <option value="">Cancer</option>
+                        <option value="">Coronavirus disease 2019</option>
+                    </select>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+                <br>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

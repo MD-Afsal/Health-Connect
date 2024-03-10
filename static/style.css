@@ -225,3 +225,26 @@ input[type=radio]{
     color: black;
     border-radius: 12px;
 }
+
+
+/*CSS for User Details*/
+
+input[type=file]{
+    background-color: #fff;
+    text-align: center;
+    color: #111;
+    font-weight: 200;
+}
+
+input[type="file"]::file-selector-button {
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+    cursor: pointer;
+    background-color: dodgerblue;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    margin-right: 16px;
+    transition: background-color 200ms;
+    color: #fff;
+  }
