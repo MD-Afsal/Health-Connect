@@ -290,3 +290,15 @@ def serve_image(image_id):
 5. tbl_doctor_images(id, doc_pic1, doc_pic2, doc_pic3, doc_pic4, doc_pic5, doc_pic6)
 6. tbl_user_medicalreport_images(id, rep1, rep2, rep3, rep4, rep5, rep6, rep7, rep8, rep9, rep10)
 7. tbl_user_medicalbill_images(id, bill1, bill2, bill3, bill4, bill5, bill6, bill7, bill8, bill9, bill10)
+
+
+DELIMITER //
+CREATE TRIGGER after_doc_details_id_insert
+AFTER INSERT ON tbl_doctor_details
+FOR EACH ROW
+BEGIN
+    INSERT INTO tbl_doctor_images (id)
+    VALUES (NEW.id);
+END;
+//
+DELIMITER ;

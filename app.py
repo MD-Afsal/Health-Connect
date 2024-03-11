@@ -23,7 +23,6 @@ def index():
     return render_template('main.html')
 
 
-
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
@@ -58,7 +57,7 @@ def signin():
 # image retrival using id
 @app.route('/image/<int:image_id>')
 def get_image(image_id):
-    mycursor.execute("SELECT doc_img FROM tbl_docter WHERE id = %s", (image_id,))
+    mycursor.execute("SELECT doc_img FROM tbl_doctor_details WHERE id = %s", (image_id,))
     image_data = mycursor.fetchone()[0]
     # mycursor.close()
     return Response(image_data, mimetype='image/jpeg')  # Adjust mimetype based on your image type
@@ -69,9 +68,9 @@ def home():
     return render_template('main.html')
 
 
-@app.route('/backpose')
-def rotateimg():
-    return render_template('rotateimg.html')
+@app.route('/home_')
+def home2():
+    return render_template('home2.html')
 
 
 @app.route('/insert_rec', methods=['POST', 'GET'])
@@ -86,11 +85,13 @@ def insert_rec():
         phone = request.form['doc_num']
         time_in = request.form['doc_time_in']
         time_out = request.form['doc_time_out']
+        sql = '''insert into tbl_doctor_details(doc_name, doc_img, doc_img_path, category, district, city, address, hospital_name, phone, 
+                        time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s)'''
 
-        sql = '''insert into tbl_docter(doc_name, category, district, city, address, hospital_name, phone, 
+        """sql = '''insert into tbl_doctor_details(doc_name, category, district, city, address, hospital_name, phone, 
                 time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s ,%s)'''
 
-        val = (doc_name, category, district, city, address, hospital_name, phone, time_in, time_out)
+        val = (doc_name, category, district, city, address, hospital_name, phone, time_in, time_out)"""
 
         mycursor.execute(sql, val)
         mydb.commit()
