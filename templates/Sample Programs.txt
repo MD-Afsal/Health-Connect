@@ -293,12 +293,14 @@ def serve_image(image_id):
 
 
 DELIMITER //
-CREATE TRIGGER after_doc_details_id_insert
-AFTER INSERT ON tbl_doctor_details
+CREATE TRIGGER after_user_login_id_insert
+AFTER INSERT ON tbl_login
 FOR EACH ROW
 BEGIN
-    INSERT INTO tbl_doctor_images (id)
-    VALUES (NEW.id);
+    INSERT INTO tbl_user_details(id) VALUES (NEW.id);
+    INSERT INTO tbl_user_address(id) VALUES (NEW.id);
+    INSERT INTO tbl_user_medicalbill_images(id) VALUES (NEW.id);
+    INSERT INTO tbl_user_medicalreport_images(id) VALUES (NEW.id);
 END;
 //
 DELIMITER ;
