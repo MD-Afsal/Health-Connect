@@ -33,7 +33,12 @@ def signup():
         val = (user, pasw, email)
         mycursor.execute(sql, val)
         mydb.commit()
-        session['user'] = request.form.get('user')
+        session['user'] = request.form.get('iduser')
+        session['password'] = request.form.get('idpass')
+        session['email'] = request.form.get('idemail')
+        mycursor.execute("select id from tbl_login where username=%s and password=%s",(session.get('user'),session.get('password')))
+        user_id = mycursor.fetchone()
+        session['id'] = user_id
         return redirect(url_for('home'))
     return redirect(url_for('index'))
 
@@ -44,9 +49,14 @@ def signin():
         username = request.form['emailId']
         password = request.form['passwordId']
         mycursor.execute("SELECT * FROM tbl_login WHERE username=%s AND password=%s", (username, password))
-        user = mycursor.fetchone()
+        user = mycursor.fetchall()
         if user:
-            session['user'] = request.form.get('user')
+            user1 = user[0]
+            session['id'] = user1[0]
+            session['user'] = user1[1]
+            session['email'] = user1[2]
+            session['password'] = user1[3]
+            # user refers the list with in a tuple and the user1 refers the 1st tuple on the list
             return redirect(url_for('home'))
         else:
             msg = "Incorrect user or password!"
@@ -85,13 +95,11 @@ def insert_rec():
         phone = request.form['doc_num']
         time_in = request.form['doc_time_in']
         time_out = request.form['doc_time_out']
+
         sql = '''insert into tbl_doctor_details(doc_name, doc_img, doc_img_path, category, district, city, address, hospital_name, phone, 
-                        time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s)'''
+        time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s)'''
 
-        """sql = '''insert into tbl_doctor_details(doc_name, category, district, city, address, hospital_name, phone, 
-                time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s ,%s)'''
-
-        val = (doc_name, category, district, city, address, hospital_name, phone, time_in, time_out)"""
+        val = (doc_name, category, district, city, address, hospital_name, phone, time_in, time_out)
 
         mycursor.execute(sql, val)
         mydb.commit()
