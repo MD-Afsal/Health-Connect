@@ -71,12 +71,6 @@ def insert_rec():
         time_in = request.form['doc_time_in']
         time_out = request.form['doc_time_out']
 
-            #insert_query = 'INSERT INTO images (image_path) VALUES (%s)'
-            #mycursor.execute(insert_query, (image_path1,))
-            #mydb.commit()
-
-            #return 'Image uploaded successfully!'
-
         sql = '''insert into tbl_doctor_details(doc_name, doc_img, doc_img_path, category, district, city, address, hospital_name, phone, 
                 time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s)'''
 

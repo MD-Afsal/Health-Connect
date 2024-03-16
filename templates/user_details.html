@@ -19,33 +19,33 @@
 
         <main>
             <section>
-                <form action="" method="post" class="input_container">
-                    <label for="txt_name">Name</label>
-                    <input type="text" name="txt_name">
-                    <label for="txt_img">Image</label>
-                    <input type="file" name="txt_img" id="" accept="image/*">
-                    <label for="txt_age">Age</label>
-                    <input type="number" name="txt_age" id="">
+                <form action="/user_details" method="post" class="input_container" enctype="multipart/form-data">
+                    <label for="user_name">Name</label>
+                    <input type="text" name="user_name">
+                    <label for="user_img">Image</label>
+                    <input type="file" name="user_img" id="" accept="image/*">
+                    <label for="user_age">Age</label>
+                    <input type="number" name="user_age" id="">
                     <label for="dd_gender">Gender</label>
-                    <select name="dd_gender" id="">
-                        <option value="">Male</option>
-                        <option value="">Female</option>
-                        <option value="">Others</option>
+                    <select name="user_gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
                     </select>
-                    <label for="txt_blood">Blood Group</label>
-                    <input type="text" name="txt_blood" placeholder="Eg : A+">
-                    <label for="dd_affected_with">Affected With</label>
-                    <select name="dd_affected_with" id="">
-                        <option value="">Cardiovascular Diseases</option>
-                        <option value="">Diabetes</option>
-                        <option value="">Respiratory diseases</option>
-                        <option value="">Tuberculosis</option>
-                        <option value="">Malaria</option>
-                        <option value="">Diarrhoea</option>
-                        <option value="">Stroke</option>
-                        <option value="">Hepatitis</option>
-                        <option value="">Cancer</option>
-                        <option value="">Coronavirus disease 2019</option>
+                    <label for="user_bloodgrp">Blood Group</label>
+                    <input type="text" name="user_bloodgrp" placeholder="Eg : B+">
+                    <label for="user_affected_with">Affected With</label>
+                    <select name="user_affected_with" >
+                        <option value="Cardiovascular Diseases">Cardiovascular Diseases</option>
+                        <option value="Diabetes">Diabetes</option>
+                        <option value="Respiratory diseases">Respiratory diseases</option>
+                        <option value="Tuberculosis">Tuberculosis</option>
+                        <option value="Malaria">Malaria</option>
+                        <option value="Diarrhoea">Diarrhoea</option>
+                        <option value="Stroke">Stroke</option>
+                        <option value="Hepatitis">Hepatitis</option>
+                        <option value="Cancer">Cancer</option>
+                        <option value="Coronavirus disease 2019">Coronavirus disease 2019</option>
                     </select>
                     <br>
                     <input type="submit" value="Submit">
