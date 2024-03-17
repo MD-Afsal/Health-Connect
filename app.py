@@ -152,5 +152,6 @@ def insert_user_rec():
 def head():
     return render_template('head.html')
 
+u
 if __name__ == '__main__':
     app.run(debug=True)

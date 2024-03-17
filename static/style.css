@@ -248,3 +248,12 @@ input[type="file"]::file-selector-button {
     transition: background-color 200ms;
     color: #fff;
   }
+
+  
+  .imgcon{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    box-shadow: #05386b 0 10px 20px 0;
+  }
