@@ -304,3 +304,8 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+ALTER TABLE tbl_doctor_details ADD map_code varchar(1000);
+
+update tbl_doctor_details set map_code = "<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.6715578768817!2d77.73627257478573!3d8.722704731124955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b040d2d51748d55%3A0xea7b37bc9180ce96!2sSukumar%20dental%20Clinic!5e0!3m2!1sen!2sin!4v1709540192920!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+" where id = 2;
