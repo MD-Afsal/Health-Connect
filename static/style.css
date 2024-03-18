@@ -257,3 +257,23 @@ input[type="file"]::file-selector-button {
     border-radius: 15px;
     box-shadow: #05386b 0 10px 20px 0;
   }
+
+
+  .container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 50px;
+  }
+
+  .doctor-card{
+    background-color: #05386b;
+    padding: 12px 14px;
+    width: 26% fit-content;
+    margin: auto;
+    color: white;
+    border-radius: 25px;
+  }
+
+  .doctor-card iframe{
+    width: 0 auto;
+}
