@@ -6,7 +6,7 @@ app = Flask(__name__)
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': '',
+    'password': 'Samsung753',
     'database': 'HealthCon'
 } 
 
@@ -36,4 +36,4 @@ def get_doctor_details():
 
 
 if "__main__" == __name__:
-    app.run(debug=True)
+    app.run(debug=True, port='32')

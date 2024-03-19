@@ -6,7 +6,7 @@ app = Flask(__name__)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Admin93@",
+    password="Samsung753",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -14,7 +14,7 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    return render_template('main.html')
+    return render_template('user_details.html')
 
 
 @app.route('/head')
@@ -56,12 +56,6 @@ def insert_rec():
         image = request.files['doc_img']
         image_data = image.read()
         image_path = f"uploads/{image.filename}"
-
-        '''if 'doc_img' in request.files:
-            image = request.files['doc_img']
-            image_path = f"uploads/{image.filename}"
-            image.save(image_path)'''
-
         category = request.form['doc_cat']
         district = request.form['doc_dict']
         city = request.form['doc_city']
@@ -70,11 +64,12 @@ def insert_rec():
         phone = request.form['doc_num']
         time_in = request.form['doc_time_in']
         time_out = request.form['doc_time_out']
+        map_code = request.form['map_code']
 
         sql = '''insert into tbl_doctor_details(doc_name, doc_img, doc_img_path, category, district, city, address, hospital_name, phone, 
-                time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s)'''
+                time_IN, time_OUT, map_code) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s, %s)'''
 
-        val = (doc_name, image_data, image_path, category, district, city, address, hospital_name, phone, time_in, time_out)
+        val = (doc_name, image_data, image_path, category, district, city, address, hospital_name, phone, time_in, time_out, map_code)
 
         mycursor.execute(sql, val)
         mydb.commit()

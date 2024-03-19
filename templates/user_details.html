@@ -16,7 +16,7 @@
 			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
 			<a class="navi" style="background-color: #05386bc9; color: #ffff;">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
 		</header>
-
+        
         <main>
             <section>
                 <form action="/user_details" method="post" class="input_container" enctype="multipart/form-data">
@@ -36,6 +36,7 @@
                     <input type="text" name="user_bloodgrp" placeholder="Eg : B+">
                     <label for="user_affected_with">Affected With</label>
                     <select name="user_affected_with" >
+                        <option value="None">None</option>
                         <option value="Cardiovascular Diseases">Cardiovascular Diseases</option>
                         <option value="Diabetes">Diabetes</option>
                         <option value="Respiratory diseases">Respiratory diseases</option>

@@ -10,7 +10,7 @@ Session(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Admin93@",
+    password="Samsung753",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -152,6 +152,19 @@ def insert_user_rec():
 def head():
     return render_template('head.html')
 
-u
+
+@app.route('/get_doctor_details', methods=['GET'])
+def get_doctor_details():
+
+    category = request.args.get('category')
+
+    query = "SELECT * FROM tbl_doctor_details WHERE category = %s"
+    mycursor.execute(query, (category,))
+    doctor_details = mycursor.fetchall()
+
+    html_content = render_template('doctor_details.html', doctor_details=doctor_details)
+    return html_content
+
+
 if __name__ == '__main__':
     app.run(debug=True)

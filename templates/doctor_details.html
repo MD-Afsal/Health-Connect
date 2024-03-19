@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container1">
         {% for doctor in doctor_details %}
         <div class="doctor-card">
             <h3>Name: {{ doctor[1]}}</h3>
@@ -16,12 +16,6 @@
             <iframe src="{{doctor[12]}}" width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
-        <div class="doctor-card">
-            <h3>Name: {{ doctor[1]}}</h3>
-            <p>Phone: {{ doctor[9] }}</p>
-            <p>Address: {{ doctor[7] }}</p><br>
-            <iframe src="{{doctor[12]}}" width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
         {% endfor %}
     </div>
 </body>
