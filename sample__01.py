@@ -1,4 +1,5 @@
 import mysql.connector
+import qrcode
 from flask import Flask, render_template, request, url_for, redirect, session, Response
 
 app = Flask(__name__)
@@ -107,5 +108,46 @@ def upload():
     return 'Image upload failed.'
 
 
-if __name__ == '__main__':
+def generate_qr_code(data, filename="my_qrcode.png"):
+    """
+    Generate a QR code from the provided data and save it as an image.
+
+    Parameters:
+        data (str): The data to be encoded in the QR code.
+        filename (str): The filename to save the QR code image. Default is "my_qrcode.png".
+    """
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(data)
+    qr.make(fit=True)
+
+    # Create an image from the QR Code instance
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Save the image
+    img.save(filename)
+
+    print("QR Code generated successfully!")
+
+
+def get_data_to_encode():
+    """
+    Prompt the user to enter the data to encode in the QR code.
+
+    Returns:
+        str: The data entered by the user.
+    """
+    data = input("Enter the data to encode in the QR code: ")
+    return data
+
+
+# Example usage:
+if __name__ == "__main__":
+    data_to_encode = get_data_to_encode()
+    generate_qr_code(data_to_encode)
     app.run(debug=True)
+
