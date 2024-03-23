@@ -7,7 +7,7 @@ app = Flask(__name__)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Samsung753",
+    password="Admin93@",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -15,7 +15,7 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    return render_template('user_details.html')
+    return render_template('chest.html')
 
 
 @app.route('/head')
@@ -26,6 +26,7 @@ def head():
 @app.route('/home_')
 def home2():
     return render_template('home2.html')
+
 
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
@@ -41,6 +42,7 @@ def signin():
             msg = "Incorrect user or password!"
             return render_template('login.html', msg=msg)
     return redirect(url_for('index'))
+
 
 @app.route('/image/<int:image_id>')
 def get_image(image_id):
@@ -108,6 +110,19 @@ def upload():
     return 'Image upload failed.'
 
 
+@app.route('/get_doctor_details', methods=['GET'])
+def get_doctor_details():
+
+    category = request.args.get('category')
+
+    query = "SELECT * FROM tbl_doctor_details WHERE category = %s"
+    mycursor.execute(query, (category,))
+    doctor_details = mycursor.fetchall()
+
+    html_content = render_template('doctor_details.html', doctor_details=doctor_details)
+    return html_content
+
+
 def generate_qr_code(data, filename="my_qrcode.png"):
     """
     Generate a QR code from the provided data and save it as an image.
@@ -147,7 +162,7 @@ def get_data_to_encode():
 
 # Example usage:
 if __name__ == "__main__":
-    data_to_encode = get_data_to_encode()
-    generate_qr_code(data_to_encode)
+    #data_to_encode = get_data_to_encode()
+    #generate_qr_code(data_to_encode)
     app.run(debug=True)
 

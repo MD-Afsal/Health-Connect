@@ -23,7 +23,6 @@ def index():
     return render_template('main.html')
 
 
-
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
@@ -58,7 +57,7 @@ def signin():
 # image retrival using id
 @app.route('/image/<int:image_id>')
 def get_image(image_id):
-    mycursor.execute("SELECT doc_img FROM tbl_docter WHERE id = %s", (image_id,))
+    mycursor.execute("SELECT doc_img FROM tbl_doctor_details WHERE id = %s", (image_id,))
     image_data = mycursor.fetchone()[0]
     # mycursor.close()
     return Response(image_data, mimetype='image/jpeg')  # Adjust mimetype based on your image type
@@ -66,18 +65,21 @@ def get_image(image_id):
 
 @app.route('/home')
 def home():
-    return render_template('main.html')
+    return render_template('home.html')
 
 
-@app.route('/backpose')
-def rotateimg():
-    return render_template('rotateimg.html')
+@app.route('/home_')
+def home2():
+    return render_template('home2.html')
 
 
-@app.route('/insert_rec', methods=['POST', 'GET'])
+@app.route('/insert_doctor_rec', methods=['POST', 'GET'])
 def insert_rec():
     if request.method == 'POST':
         doc_name = request.form['doc_name']
+        image = request.files['doc_img']
+        image_data = image.read()
+        image_path = f"uploads/{image.filename}"
         category = request.form['doc_cat']
         district = request.form['doc_dict']
         city = request.form['doc_city']
@@ -86,16 +88,47 @@ def insert_rec():
         phone = request.form['doc_num']
         time_in = request.form['doc_time_in']
         time_out = request.form['doc_time_out']
+        map_code = request.form['map_code']
 
-        sql = '''insert into tbl_docter(doc_name, category, district, city, address, hospital_name, phone, 
-                time_IN, time_OUT) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s ,%s)'''
+        sql = '''insert into tbl_doctor_details(doc_name, doc_img, doc_img_path, category, district, city, address,
+         hospital_name, phone, time_IN, time_OUT, map_code) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s, %s)'''
 
-        val = (doc_name, category, district, city, address, hospital_name, phone, time_in, time_out)
+        val = (doc_name, image_data, image_path, category, district, city, address, hospital_name, phone, time_in, time_out, map_code)
 
         mycursor.execute(sql, val)
         mydb.commit()
     return render_template('adminPage.html')
-    
+
+
+# for user input action (admin page)
+@app.route('/insert_user_rec', methods=['POST', 'GET'])
+def insert_user_rec():
+    global msg
+    if request.method == 'POST':
+        user_name = request.form['user_name']
+        user_pass = request.form['user_pass']
+        mycursor.execute("SELECT * FROM tbl_login WHERE username=%s AND password=%s", (user_name, user_pass))
+        user = mycursor.fetchone()
+        if user:
+            return render_template('userAccountModificationPage.html')
+            # create function for user modification in user profile
+        else:
+            msg = "Incorrect user or password!"
+    return render_template('adminPage.html', msg=msg)
+
+
+@app.route('/get_doctor_details', methods=['GET'])
+def get_doctor_details():
+
+    category = request.args.get('category')
+
+    query = "SELECT * FROM tbl_doctor_details WHERE category = %s"
+    mycursor.execute(query, (category,))
+    doctor_details = mycursor.fetchall()
+
+    html_content = render_template('doctor_details.html', doctor_details=doctor_details)
+    return html_content
+
 
 if __name__ == '__main__':
     app.run(debug=True)

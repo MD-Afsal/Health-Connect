@@ -287,6 +287,12 @@ input[type="file"]::file-selector-button {
     border-radius: 25px;
   }
 
+  .doctor-card:hover{
+    box-shadow: 15px 16px 18px rgb(59, 107, 179) ;
+    transition: .2s;
+    padding: 5%;
+  }
+
   .doctor-card iframe{
     width: 0 auto;
 }
