@@ -1,0 +1,53 @@
+<HTML>
+
+    <HEAD>
+        <TITLE>HEALTH CONNECT</TITLE>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    </HEAD>
+    
+    <BODY>
+        <header>
+            <img src="{{ url_for('static', filename='logo.png') }}">
+            <h3 class="title">HEALTH CONNECT</h3>
+            <div style="padding-right: 30%;"></div>
+            <a class="navi" style="background-color: #05386bc9; color: #ffff;">Home</a>
+            <div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a>
+            <div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a>
+            <div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a>
+            <div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
+        </header>
+        <div>
+            <div class="lable">
+                <div class="lable_container">
+                    <h2 for="dropdown">Select the catergory to find the Hospital</h2>
+    
+                    <div class="dropdown">
+                        <button>Select catergory</button>
+                        <div class="dropdown-content">
+                            <a href="#">Urologist(Urinary system)</a>
+                            <a href="#">Paediatricians(Child Speclist)</a>
+                            <a href="#">Gastroenterologist</a>
+                            <a href="#">Nephrologist(Kidney)</a>
+                            <a href="#">Skin Doctors</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+    
+            <div class="content">
+                <div class="doctor-details">
+                    <img class="imgcon" src="{{ url_for('static', filename='stomach.jpg') }}">
+                </div>
+            </div>
+    
+            <script src="{{ url_for('static', filename='doctor.js') }}"></script>
+        </div>
+    </BODY>
+    
+    </HTML>

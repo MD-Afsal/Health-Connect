@@ -8,16 +8,15 @@
 </head>
 <body>
     <div class="container1">
-        {% for doctor in doctor_details %}
-        <div class="doctor-card">
-            <div style="padding: 12px;
-            margin: auto;
-            background-color: aliceblue;
-            color: black;
-            border-radius: 12px;">
-            <h3 id="doctor-name">Name: {{ doctor[1]}}</h3>
-            <p id="phone-number">Phone: {{ doctor[9] }}</p>
-            <p>Address: {{ doctor[7] }}</p></div><br><center>
+        {% for doctor in doc_details %}
+        <div>
+            
+            <h1>Name: {{ doctor[1]}}</h3>
+            <h2>City: {{ doctor[6]}}</h3>
+            
+            <p>Phone: {{ doctor[9] }}</p>
+            <p>Address: {{ doctor[7] }}</p></div><br>
+            <center>
             <iframe src="{{doctor[12]}}" width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border: 1px solid #ccc; padding: 10px; align-content: center;"></iframe>
             </center>
             

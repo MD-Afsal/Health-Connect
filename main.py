@@ -23,7 +23,7 @@ def get_doctor_details():
 
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
-
+    print(category)
     query = "SELECT * FROM tbl_doctor_details WHERE category = %s"
     cursor.execute(query, (category,))
     doctor_details = cursor.fetchall()
@@ -33,6 +33,22 @@ def get_doctor_details():
     html_content = render_template('doctor_details.html', doctor_details=doctor_details)
     return html_content
 
+
+@app.route('/get_card_details', methods=['GET'])
+def get_card_details():
+    phone_no = request.args.get('phone_no')
+    name = request.args.get('name')
+    print("phone_no")
+    conn = mysql.connector.connect(**db_config)
+    mycursor = conn.cursor()
+
+    query = "select * from tbl_doctor_details where phone = %s"
+    mycursor.execute(query, (phone_no, name,))
+    doc_details = mycursor.fetchall()
+    conn.close()
+
+    para = render_template('card_details.html', doc_details=doc_details)
+    return para
 
 
 if "__main__" == __name__:

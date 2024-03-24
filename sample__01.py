@@ -15,12 +15,42 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 def index():
-    return render_template('chest.html')
+    return render_template('adminPage.html')
 
 
 @app.route('/head')
 def head():
     return render_template('head.html')
+
+
+@app.route('/chest')
+def chest():
+    return render_template('chest.html')
+
+
+@app.route('/hand')
+def hand():
+    return render_template('hand.html')
+
+
+@app.route('/stomach')
+def stomach():
+    return render_template('stomach.html')
+
+
+@app.route('/leg')
+def leg():
+    return render_template('leg.html')
+
+
+@app.route('/posterior')
+def posterior():
+    return render_template('posterior.html')
+
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 
 @app.route('/home_')

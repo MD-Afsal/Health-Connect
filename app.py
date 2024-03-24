@@ -73,6 +73,36 @@ def home2():
     return render_template('home2.html')
 
 
+@app.route('/head')
+def head():
+    return render_template('head.html')
+
+
+@app.route('/chest')
+def chest():
+    return render_template('chest.html')
+
+
+@app.route('/hand')
+def hand():
+    return render_template('hand.html')
+
+
+@app.route('/stomach')
+def stomach():
+    return render_template('stomach.html')
+
+
+@app.route('/leg')
+def leg():
+    return render_template('leg.html')
+
+
+@app.route('/posterior')
+def posterior():
+    return render_template('posterior.html')
+
+
 @app.route('/insert_doctor_rec', methods=['POST', 'GET'])
 def insert_rec():
     if request.method == 'POST':
