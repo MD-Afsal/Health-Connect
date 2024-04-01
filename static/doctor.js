@@ -25,11 +25,11 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-    function fetchCardDetails(phone_no, name) {
+    function fetchCardDetails(phone_no) {
         $.ajax({
             url:'/get_card_details',
-            method:'GET', // Corrected the spelling of 'method'
-            data: {phone_no: phone_no.value, name: name.value}, // Get the values of the DOM elements
+            method:'GET', 
+            data: {phone_no: phone_no },
             success: function(response) {
                 $('.card-details').html(response);
             },
@@ -41,11 +41,8 @@ $(document).ready(function() {
 
     $('.doctor-card').click(function(event) {
         event.preventDefault();
-      
-        // var phone_no = $(this).text();  // Adjust selector for phone element
-        // var name = $(this).text();    // Adjust selector for name element
-      
-        fetchCardDetails(phone_no, name);
+        var phone_no = $(this).find("#phone-number").text().trim();
+        fetchCardDetails(phone_no);
       });
 
 });

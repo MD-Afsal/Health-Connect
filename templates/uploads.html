@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+			<img src="{{ url_for('static', filename='logo.png') }}">
+			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
+			<a class="navi">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi"  style="background-color: #05386bc9; color: #ffff;" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
+		</header>
+        
+        <main>
+            <section>
+                <form action="/user_details" method="post" class="input_container" enctype="multipart/form-data">
+                    <label for="rep1">Medical Report 1</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+                    <label for="rep1">Medical Report 2</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+                    <label for="rep1">Medical Report 3</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+                    <label for="rep1">Medical Report 4</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+                    <label for="rep1">Medical Report 5</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+                    <label for="rep1">Medical Report 6</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+                    <label for="rep1">Medical Report 7</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+                    <label for="rep1">Medical Report 8</label>
+                    <input type="file" name="rep1" accept="image/*" multiple>
+
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+                <br>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

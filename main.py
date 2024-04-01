@@ -36,14 +36,12 @@ def get_doctor_details():
 
 @app.route('/get_card_details', methods=['GET'])
 def get_card_details():
-    phone_no = request.args.get('phone_no')
-    name = request.args.get('name')
-    print("phone_no")
     conn = mysql.connector.connect(**db_config)
     mycursor = conn.cursor()
-
+    phone_no = request.args.get('phone_no')
+    print("Received phone number:", phone_no)
     query = "select * from tbl_doctor_details where phone = %s"
-    mycursor.execute(query, (phone_no, name,))
+    mycursor.execute(query, (phone_no,))
     doc_details = mycursor.fetchall()
     conn.close()
 
