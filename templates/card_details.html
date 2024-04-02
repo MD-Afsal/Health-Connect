@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Json</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        .card-details {
+            background-color: #05386b;
+            padding: 12px 14px;
+            width: 26% fit-content;
+            margin: auto;
+            color: white;
+            border-radius: 25px;
+            margin-top: 20px;
+        }
+
+        .card-details iframe {
+            margin-top: 30px;
+            width: 0 auto;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container1">
         {% for doctor in doc_details %}
         <div class="card-details">
-            
-            <h1>Name: {{ doctor[1]}}</h3>
-            <h2>City: {{ doctor[6]}}</h3>
-            
-            <p>Phone: {{ doctor[9] }}</p>
-            <p>Address: {{ doctor[7] }}</p><br>
+            <div style="padding: 12px;
+            margin: auto;
+            background-color: aliceblue;
+            color: black;
+            border-radius: 12px;">
+                <h1>Name: {{ doctor[1]}}</h3>
+                    <h2>City: {{ doctor[6]}}</h3>
+                        <p>Phone: {{ doctor[9] }}</p>
+                        <p>Address: {{ doctor[7] }}</p><br>
+            </div>
             <center>
-            <iframe src="{{doctor[12]}}" width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border: 1px solid #ccc; padding: 10px; align-content: center;"></iframe>
+                <iframe src="{{doctor[12]}}" width="250" height="250" style="border:0;" allowfullscreen=""
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    style="border: 1px solid #ccc; padding: 10px; align-content: center;"></iframe>
             </center>
-            
+
         </div>
         {% endfor %}
     </div>
 </body>
+
 </html>

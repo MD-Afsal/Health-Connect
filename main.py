@@ -6,7 +6,7 @@ app = Flask(__name__)
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Admin93@',
+    'password': '',
     'database': 'HealthCon'
 } 
 
@@ -44,7 +44,6 @@ def get_card_details():
     mycursor.execute(query, (phone_no,))
     doc_details = mycursor.fetchall()
     conn.close()
-
     para = render_template('card_details.html', doc_details=doc_details)
     return para
 

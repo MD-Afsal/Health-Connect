@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: 0;
     padding-top: 0.5;
 }
-body{
+
+body {
     font-family: 'Montserrat', sans-serif;
     /*background-color: #f3f6ff;*/
     background: linear-gradient(90deg, #FFF 0%, rgba(212, 234, 255, 0.72) 27.49%, rgba(214, 233, 250, 0.73) 29.96%, rgba(172, 215, 255, 0.45) 59.39%, rgba(80, 169, 252, 0.45) 100%);
@@ -15,17 +16,20 @@ body{
     color: #05386b;
     padding-top: 0%;
 }
-header img{
+
+header img {
     width: 3.5%;
     border-radius: 50%;
     border-color: #05386b;
-    padding:1%;
+    padding: 1%;
 }
-header{
+
+header {
     display: flex;
     align-items: center;
 }
-.navi{
+
+.navi {
     text-decoration: none;
     padding: 5px 12px;
     font-size: 100%;
@@ -35,34 +39,38 @@ header{
     border-radius: 16px;
 
 }
-.title{
+
+.title {
     border-width: 12cm;
     border-color: #05386b;
-   
+
 }
-.navi:hover{
- 
+
+.navi:hover {
+
     /*background-color:  #05386bc9;
     color: #ffff;*/
     text-decoration: underline;
 
 }
-.navi:active{
+
+.navi:active {
     background-color: #38383a;
 }
 
-.lable_container{
+.lable_container {
     padding: 3% 0;
     background-color: #05386b;
     color: #f1f1f1;
     text-align: center;
 }
 
-.lable_container h1{
+.lable_container h1 {
     padding: 15px;
     letter-spacing: 3px;
 }
-.lable_container h2{
+
+.lable_container h2 {
     padding: 12px;
     letter-spacing: 2px;
 }
@@ -74,7 +82,7 @@ header{
 }
 
 /* Button Style */
-button{
+button {
     padding: 12px;
     font-family: 'Montserrat', sans-serif;
     background-color: #3498db;
@@ -127,13 +135,13 @@ button{
 
 /*CSS for Admin page*/
 
-.input_container{
+.input_container {
     width: 30%;
     height: max-content;
     margin: auto;
     margin-top: 40px;
     display: grid;
-    align-items:center;
+    align-items: center;
     line-height: 2;
     background-color: #05386b;
     padding: 2.5% 5%;
@@ -141,12 +149,12 @@ button{
     border-radius: 10px;
 }
 
-.input_container:hover{
+.input_container:hover {
     box-shadow: #05386b 0 10px 20px 0;
     transition: 0.3s;
 }
 
-.input_container input{
+.input_container input {
     width: 100%;
     height: auto;
     margin: auto;
@@ -158,7 +166,7 @@ button{
     color: #0a95f1;
 }
 
-.input_container textarea{
+.input_container textarea {
     width: 100%;
     height: auto;
     margin: auto;
@@ -171,7 +179,7 @@ button{
 }
 
 
-.input_container select{
+.input_container select {
     width: 105%;
     height: auto;
     margin: auto;
@@ -182,7 +190,7 @@ button{
     font-weight: 600;
 }
 
-.input_container option{
+.input_container option {
     width: 105%;
     height: auto;
     margin: auto;
@@ -193,44 +201,44 @@ button{
     font-size: 17px;
 }
 
-input:hover{
+input:hover {
     border-color: #0a95f1;
     border-width: 2px;
 }
 
-input:focus{
+input:focus {
     box-shadow: #0a95f1 0 17px 29px 0;
     transition: 0.3s;
 }
 
-.input_time{
+.input_time {
     width: 30px;
 }
 
-input[type=submit]{
+input[type=submit] {
     border: none;
     width: 50%;
     color: white;
     background-color: #0a95f1;
 }
 
-input[type=submit]:active{
+input[type=submit]:active {
     box-shadow: #0a95f1 0 17px 29px 0;
     transform: scale(-2);
     transition: 0.4s;
 }
 
-input[type=radio]{
+input[type=radio] {
     width: auto;
     height: auto;
     margin: auto;
     outline: none;
     font-size: 17px;
     font-weight: 600;
-    
+
 }
 
-.adminpageselection{
+.adminpageselection {
     padding: 12px;
     margin: auto;
     border-style: solid;
@@ -242,7 +250,7 @@ input[type=radio]{
 
 /*CSS for User Details*/
 
-input[type=file]{
+input[type=file] {
     background-color: #fff;
     text-align: center;
     color: #111;
@@ -260,39 +268,40 @@ input[type="file"]::file-selector-button {
     margin-right: 16px;
     transition: background-color 200ms;
     color: #fff;
-  }
+}
 
-  
-  .imgcon{
+
+.imgcon {
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 15px;
     box-shadow: #05386b 0 10px 20px 0;
-  }
+}
 
 
-  .container1{
-    display: grid; /* grid*/
+.container1 {
+    display: grid;
+    /* grid*/
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 50px;
-  }
+}
 
-  .doctor-card{
+.doctor-card {
     background-color: #05386b;
     padding: 12px 14px;
     width: 26% fit-content;
     margin: auto;
     color: white;
     border-radius: 25px;
-  }
+}
 
-  .doctor-card:hover{
-    box-shadow: 15px 16px 18px rgb(59, 107, 179) ;
+.doctor-card:hover {
+    box-shadow: 15px 16px 18px rgb(59, 107, 179);
     transition: .2s;
     padding: 5%;
-  }
+}
 
-  .doctor-card iframe{
+.doctor-card iframe {
     width: 0 auto;
 }
