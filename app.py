@@ -14,6 +14,7 @@ mydb = mysql.connector.connect(
     database="HealthCon"
 )
 mycursor = mydb.cursor()
+global user_id
 
 
 @app.route('/')
@@ -33,8 +34,14 @@ def signup():
         val = (user, pasw, email)
         mycursor.execute(sql, val)
         mydb.commit()
-        session['user'] = request.form.get('user')
-        return redirect(url_for('home'))
+        session['user'] = request.form.get('iduser')
+        session['password'] = request.form.get('idpass')
+        session['email'] = request.form.get('idemail')
+        mycursor.execute("select id from tbl_login where username=%s and password=%s",
+                         (session.get('user'), session.get('password')))
+        user_id = mycursor.fetchone()
+        session['id'] = user_id
+        return redirect(url_for('get_userinput'))
     return redirect(url_for('index'))
 
 
@@ -44,14 +51,44 @@ def signin():
         username = request.form['emailId']
         password = request.form['passwordId']
         mycursor.execute("SELECT * FROM tbl_login WHERE username=%s AND password=%s", (username, password))
-        user = mycursor.fetchone()
+        user = mycursor.fetchall()
         if user:
-            session['user'] = request.form.get('user')
+            user1 = user[0]
+            session['id'] = user1[0]
+            session['user'] = user1[1]
+            session['email'] = user1[2]
+            session['password'] = user1[3]
+            # user refers the list with in a tuple and the user1 refers the 1st tuple on the list
             return redirect(url_for('home'))
         else:
             msg = "Incorrect user or password!"
             return render_template('login.html', msg=msg)
     return redirect(url_for('index'))
+
+
+# getting the user details
+@app.route('/user_details', methods=['GET', 'POST'])
+def get_userinput():
+    if request.method == 'POST':
+        user_name = request.form['user_name']
+        image = request.files['user_img']
+        user_image = image.read()
+        user_age = request.form['user_age']
+        user_gender = request.form['user_gender']
+        user_bloodgrp = request.form['user_bloodgrp']
+        affected_with = request.form['user_affected_with']
+        sql = '''update tbl_user_details set name=%s, user_img=%s, age=%s, gender=%s,
+         blood_group=%s, affected_with=%s where id=%s'''
+        user_id_tup = session['id']
+        user_id = user_id_tup[0]
+        print(user_id)
+        val = (user_name, user_image, user_age, user_gender, user_bloodgrp, affected_with, user_id)
+
+        mycursor.execute(sql, val)
+
+        mydb.commit()
+        return redirect(url_for('home'))
+    return render_template('user_details.html')
 
 
 # image retrival using id
@@ -159,6 +196,22 @@ def get_doctor_details():
     html_content = render_template('doctor_details.html', doctor_details=doctor_details)
     return html_content
 
+
+@app.route('/get_card_details', methods=['GET'])
+def get_card_details():
+    phone_no = request.args.get('phone_no')
+    print("Received phone number:", phone_no)
+    query = "select * from tbl_doctor_details where phone = %s"
+    mycursor.execute(query, (phone_no,))
+    doc_details = mycursor.fetchall()
+    para = render_template('card_details.html', doc_details=doc_details)
+    return para
+
+
+@app.route('/uploads', methods=['POST', 'GET'])
+def uploads():
+    if request.method == 'POST':
+        pass
 
 if __name__ == '__main__':
     app.run(debug=True)

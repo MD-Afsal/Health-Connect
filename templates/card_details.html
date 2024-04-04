@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Json</title>
+    <title>Details</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <style>
         .card-details {
@@ -27,23 +27,35 @@
 <body>
     <div class="container1">
         {% for doctor in doc_details %}
-        <div class="card-details">
-            <div style="padding: 12px;
-            margin: auto;
-            background-color: aliceblue;
-            color: black;
-            border-radius: 12px;">
-                <h1>Name: {{ doctor[1]}}</h3>
-                    <h2>City: {{ doctor[6]}}</h3>
-                        <p>Phone: {{ doctor[9] }}</p>
-                        <p>Address: {{ doctor[7] }}</p><br>
-            </div>
-            <center>
-                <iframe src="{{doctor[12]}}" width="250" height="250" style="border:0;" allowfullscreen=""
-                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    style="border: 1px solid #ccc; padding: 10px; align-content: center;"></iframe>
-            </center>
+        <div style="
+        padding: 6%;
+        margin: auto;">
 
+                <h1 class="card-details-view">Doctor name</h1>
+                <h1 class="card-details-view2">{{ doctor[1]}}</h1><br>
+                <h1 class="card-details-view">Hospital name</h1>
+                <h1 class="card-details-view2">{{ doctor[8]}}</h1><br>
+                <h1 class="card-details-view">Phone number</h1>
+                <h1 class="card-details-view2">{{ doctor[9]}}</h1><br>
+                <h1 class="card-details-view">City</h1>
+                <h1 class="card-details-view2">{{ doctor[6]}}</h1><br>
+                <h1 class="card-details-view">Address of the hospital</h1>
+                <h1 class="card-details-view2">{{ doctor[7]}}</h1><br>
+                <h1 class="card-details-view">Doctor visiting timing</h1>
+                <h1 style="text-align: center;">{{ doctor[10]}} to {{doctor[11]}}</h1><br>
+                <h1 class="card-details-view">District</h1>
+                <h1 class="card-details-view2">{{ doctor[5]}}</h1><br>
+                
+
+            </div>
+            <div style="padding: 4%;margin: auto;">
+                <center>
+                    <iframe src="{{doctor[12]}}" width="500" height="500" style="border:0;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        style="border: 1px solid #ccc; padding: 10px; align-content: center;">
+                    </iframe>
+                </center>
+            </div> 
         </div>
         {% endfor %}
     </div>
