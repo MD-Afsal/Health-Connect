@@ -160,5 +160,6 @@ def get_doctor_details():
     return html_content
 
 
+
 if __name__ == '__main__':
     app.run(debug=True)
