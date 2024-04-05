@@ -18,4 +18,14 @@
                 </div>
             </div>
         </div>
-        
+        <div class="container1">
+			<div>
+				images
+			</div>
+			<div>
+				{% for row in data %}	
+					<img src="{{ url_for('get_image', image_id=row[1] ) }}" width="500" height="500">
+					<img src="{{ url_for('get_image', image_id=row[2] ) }}" width="500" height="500">
+				{% endfor %}
+			</div>
+		</div>
