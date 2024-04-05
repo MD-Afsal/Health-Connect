@@ -247,7 +247,6 @@ input[type=radio] {
     border-radius: 12px;
 }
 
-
 /*CSS for User Details*/
 
 input[type=file] {
@@ -270,7 +269,6 @@ input[type="file"]::file-selector-button {
     color: #fff;
 }
 
-
 .imgcon {
     display: block;
     margin-left: auto;
@@ -279,12 +277,12 @@ input[type="file"]::file-selector-button {
     box-shadow: #05386b 0 10px 20px 0;
 }
 
-
 .container1 {
     display: grid;
     /* grid*/
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 50px;
+    padding: 1%;
 }
 
 .doctor-card {
@@ -304,4 +302,16 @@ input[type="file"]::file-selector-button {
 
 .doctor-card iframe {
     width: 0 auto;
+}
+
+.card-details-view{
+    color: #ffffff;
+    padding: 5px;
+    background-color: #05386b;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.card-details-view2{
+    text-align: center;
 }
