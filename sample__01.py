@@ -1,6 +1,5 @@
 import mysql.connector
 from flask import Flask, render_template, request, url_for, redirect, session, Response
-import qrcode
 from flask_session import Session
 
 app = Flask(__name__)
@@ -11,7 +10,7 @@ Session(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Admin93@",
+    password="Samsung753",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
