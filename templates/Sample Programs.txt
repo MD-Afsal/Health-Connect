@@ -346,3 +346,61 @@ def signin():
             msg = "Incorrect user or password!"
             return render_template('login.html', msg=msg)
     return redirect(url_for('index'))
+
+
+    ------------------------------------------------------------\
+import mysql.connector
+import qrcode
+
+# Function to fetch image data from MySQL and convert it to QR code
+def convert_image_to_qr(mysql_host, mysql_user, mysql_password, mysql_database, table_name, image_column, primary_key_value, qr_code_path):
+    # Connect to MySQL database
+    connection = mysql.connector.connect(
+        host=mysql_host,
+        user=mysql_user,
+        password=mysql_password,
+        database=mysql_database
+    )
+    cursor = connection.cursor()
+
+    # Fetch image data from MySQL
+    cursor.execute(f"SELECT {image_column} FROM {table_name} WHERE primary_key_column = %s", (primary_key_value,))
+    image_data = cursor.fetchone()[0]
+
+    # Create QR code instance
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+
+    # Add image data to QR code
+    qr.add_data(image_data)
+    qr.make(fit=True)
+
+    # Generate QR code image
+    qr_img = qr.make_image(fill_color="black", back_color="white")
+
+    # Save QR code image to file
+    qr_img.save(qr_code_path)
+
+    # Close MySQL connection
+    cursor.close()
+    connection.close()
+
+# Example usage:
+mysql_host = 'your_mysql_host'
+mysql_user = 'your_mysql_user'
+mysql_password = 'your_mysql_password'
+mysql_database = 'your_mysql_database'
+table_name = 'your_table_name'
+image_column = 'your_image_column'
+primary_key_value = 'primary_key_value_for_the_image'
+qr_code_path = 'image_qr.png'
+
+convert_image_to_qr(mysql_host, mysql_user, mysql_password, mysql_database, table_name, image_column, primary_key_value, qr_code_path)
+print(f"Image from database converted to QR code and saved as '{qr_code_path}'")
+
+for url in image_urls:
+        qr.add_data(url)
