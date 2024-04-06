@@ -1,6 +1,7 @@
 import mysql.connector
 from flask import Flask, render_template, request, url_for, redirect, session, Response
 from flask_session import Session
+import base64
 
 app = Flask(__name__)
 app.secret_key = '1234'
@@ -10,7 +11,7 @@ Session(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Admin93@",
+    password="Samsung753",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -93,7 +94,7 @@ def get_userinput():
 
 # image retrival using id
 @app.route('/image/<int:image_id>')
-def get_image(image_id):
+def get_image1(image_id):
     mycursor.execute("SELECT doc_img FROM tbl_doctor_details WHERE id = %s", (image_id,))
     image_data = mycursor.fetchone()[0]
     # mycursor.close()
@@ -207,6 +208,18 @@ def get_card_details():
     para = render_template('card_details.html', doc_details=doc_details)
     return para
 
+@app.route('/qr_image')
+def get_image():
+    user_Id = session['id']
+    mycursor.execute("SELECT rep1,rep2,rep3,rep4,rep5,rep6,rep7,rep8 FROM tbl_user_medicalreport_images WHERE id = %s", (user_Id,))
+    blob_data_list = []
+    for row in mycursor.fetchall():
+        for i in range(0,7):
+            base64_blob_data = base64.b64encode(row[i]).decode('utf-8')
+            blob_data_list.append(base64_blob_data)
+
+    return render_template('qrshare.html', blob_data_list=blob_data_list)
+
 
 @app.route('/uploads', methods=['POST', 'GET'])
 def uploads():
@@ -229,8 +242,9 @@ def uploads():
         image_data8 = image8.read()
         sql = '''update tbl_user_medicalreport_images set rep1=%s, rep2=%s, rep3=%s, rep4=%s, rep5=%s, rep6=%s, rep7=%s,
         rep8=%s where id=%s'''
-        user_id_tup = session['id']
-        user_id = user_id_tup[0]
+        user_id = session['id']
+
+        print("User_id",user_id)
         val = (image_data1, image_data2, image_data3, image_data4, image_data5, image_data6, image_data7,
                image_data8, user_id)
         mycursor.execute(sql, val)

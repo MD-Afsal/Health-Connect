@@ -8,8 +8,11 @@
 	<BODY>
 		<header>
 			<img src="{{ url_for('static', filename='logo.png') }}">
-			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 30%;"></div>
-			<a class="navi" style="background-color: #05386bc9; color: #ffff;">Home</a><div style="padding-left: 3%;"></div><a class="navi" href="Find Doctors">Find Doctors</a><div style="padding-left: 3%;"></div><a class="navi" href="Upload data">Upload data</a><div style="padding-left: 3%;"></div><a class="navi" href="Share data">Share data</a><div style="padding-left: 3%;"></div><a class="navi" href="#about">About</a>
+			<h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 40%;"></div>
+			<a class="navi" href="{{url_for('home')}}" >Home</a><div style="padding-left: 3%;"></div>
+			<a class="navi" href="{{url_for('uploads')}}">Upload data</a><div style="padding-left: 3%;"></div>
+			<a class="navi" href="{{ url_for('get_image') }}" style="background-color: #05386bc9; color: #ffff;">Share data</a><div style="padding-left: 3%;"></div>
+			<a class="navi" href="{{ url_for('insert_rec') }}">About</a>
 		</header>
         <div>
             <div class="lable">
@@ -18,4 +21,19 @@
                 </div>
             </div>
         </div>
-        
+        <div class="container1">
+			<div><br>
+				<center>
+				<h2>your QR-Code</h2><br>
+				<img src="{{url_for('static', filename='my_qrcode.png')}}" width="400" height="400">
+				</center>
+			</div>
+			<div>	<br>
+				<center><h2>Your reports</h2><br>
+				<!--<img src="{{ url_for('get_image', image_id=2)}}" width="1000" height="700">-->
+				{% for base64_blob_data in blob_data_list %}
+    			<img src="data:image/jpeg;base64,{{ base64_blob_data }}" alt="Blob Image" width="500" height="500"><br><br>
+    			{% endfor %}	
+    			</center>
+			</div>
+		</div>

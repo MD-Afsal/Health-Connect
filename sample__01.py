@@ -21,7 +21,7 @@ global user_id
 
 @app.route('/')
 def index():
-    return render_template('uploads.html')
+    return render_template('login.html')
 
 
 @app.route('/head')
@@ -100,7 +100,7 @@ def signin():
             session['password'] = user1[3]
             user_id = session['id']
             # user refers the list with in a tuple and the user1 refers the 1st tuple on the list
-            return redirect(url_for('get_userinput'))
+            return redirect(url_for('home'))
         else:
             msg = "Incorrect user or password!"
             return render_template('login.html', msg=msg)
@@ -132,12 +132,15 @@ def get_userinput():
     return render_template('user_details.html')
 
 
-@app.route('/image/<int:image_id>')
-def get_image(image_id):
-    mycursor.execute("SELECT doc_img FROM tbl_doctor_details WHERE id = %s", (image_id,))
-    image_data = mycursor.fetchone()[0]
+# on process
+@app.route('/qr_image')
+def get_image():
+    user_Id = session['id']
+    mycursor.execute("SELECT rep1 FROM tbl_user_medicalreport_images WHERE id = %s", (user_Id,))
+    blob_data = mycursor.fetchone()[0]
     # mycursor.close()
-    return Response(image_data, mimetype='image/jpeg')  # Adjust mimetype based on your image type
+    return render_template('qrshare.html', data=blob_data)    # , mimetype='image/jpeg')
+    # Adjust mimetype based on your image type
 
 
 @app.route('/insert_doctor_rec', methods=['POST', 'GET'])

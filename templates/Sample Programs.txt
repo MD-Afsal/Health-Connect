@@ -191,7 +191,7 @@ db = mysql.connector.connect(**db_config)
 
 @app.route('/image/<int:image_id>')
 def get_image(image_id):
-    cursor = db.cursor(dictionary=True)
+    # cursor = db.cursor(dictionary=True)
     query = "SELECT name, image_data FROM images WHERE id = %s"
     cursor.execute(query, (image_id,))
     image = cursor.fetchone()
