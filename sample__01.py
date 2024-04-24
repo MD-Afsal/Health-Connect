@@ -1,6 +1,8 @@
 import mysql.connector
 from flask import Flask, render_template, request, url_for, redirect, session, Response
 from flask_session import Session
+import base64
+import qrcode
 
 app = Flask(__name__)
 app.secret_key = '1234'
@@ -10,7 +12,7 @@ Session(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Samsung753",
+    password="Admin93@",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
@@ -287,12 +289,71 @@ def uploads():
         sql = '''update tbl_user_medicalreport_images set rep1=%s, rep2=%s, rep3=%s, rep4=%s, rep5=%s, rep6=%s, rep7=%s,
         rep8=%s where id=%s'''
         user_id_tup = session['id']
-        user_id = user_id_tup[0]
+        user_id = user_id_tup
         val = (image_data1, image_data2, image_data3, image_data4, image_data5, image_data6, image_data7,
                image_data8, user_id)
         mycursor.execute(sql, val)
         mydb.commit()
     return render_template('uploads.html')
+
+
+# Function to generate QR code for multiple image Blobs and store in MySQL
+def generate_and_store_multi_image_qr(image_blobs):
+    # Create QR code instance
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+
+    user_Id = session['id']
+    # Add image Blobs data to QR code
+    for blob_data in image_blobs:
+        qr.add_data(blob_data)
+
+    qr.make(fit=True)
+
+    # Generate QR code image
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Convert image to byte stream
+    img_byte_array = img.getvalue()
+
+    # Update existing record in MySQL with the new QR code image
+    mycursor.execute("UPDATE tbl_user_details SET qr_code = %s WHERE id = %s", (img_byte_array, user_Id))
+    print("Created qr successfully")
+    # Commit the transaction
+    mydb.commit()
+
+    # Close MySQL connection
+
+
+@app.route('/qr_code_')
+def fun_img_qr_get():
+    user_Id = session['id']
+    type_id = type(user_Id)
+    if type_id == int:
+        temp_list = [user_Id]
+        user_Id = tuple(temp_list)
+    elif type_id == tuple:
+        pass
+    mycursor.execute("SELECT rep1,rep2,rep3,rep4,rep5,rep6,rep7,rep8 FROM tbl_user_medicalreport_images WHERE id = %s",
+                     (user_Id))
+
+    image_blobs = []
+    for row in mycursor.fetchall():
+        # print(row)
+        for i in range(0, 7):
+            if row[i] is not None:
+                base64_blob_data = base64.b64encode(row[i]).decode('utf-8')
+                image_blobs.append(base64_blob_data)
+    # Convert Blob image data from base64 to bytes
+    print(image_blobs[2])
+    image_blobs = [base64.b64decode(blob.split(',')[1]) for blob in image_blobs]
+
+    generate_and_store_multi_image_qr(image_blobs)
+
 
 # Example usage:
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ import mysql.connector
 from flask import Flask, render_template, request, url_for, redirect, session, Response
 from flask_session import Session
 import base64
+import qrcode
 
 app = Flask(__name__)
 app.secret_key = '1234'
@@ -11,11 +12,12 @@ Session(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Samsung753",
+    password="Admin93@",
     database="HealthCon"
 )
 mycursor = mydb.cursor()
-global user_id
+# global user_id
+global msg
 
 
 @app.route('/')
@@ -161,7 +163,8 @@ def insert_rec():
         sql = '''insert into tbl_doctor_details(doc_name, doc_img, doc_img_path, category, district, city, address,
          hospital_name, phone, time_IN, time_OUT, map_code) values(%s ,%s ,%s, %s ,%s ,%s, %s ,%s, %s ,%s, %s, %s)'''
 
-        val = (doc_name, image_data, image_path, category, district, city, address, hospital_name, phone, time_in, time_out, map_code)
+        val = (doc_name, image_data, image_path, category, district, city, address, hospital_name, phone, time_in,
+               time_out, map_code)
 
         mycursor.execute(sql, val)
         mydb.commit()
@@ -187,7 +190,6 @@ def insert_user_rec():
 
 @app.route('/get_doctor_details', methods=['GET'])
 def get_doctor_details():
-
     category = request.args.get('category')
 
     query = "SELECT * FROM tbl_doctor_details WHERE category = %s"
@@ -208,15 +210,30 @@ def get_card_details():
     para = render_template('card_details.html', doc_details=doc_details)
     return para
 
+
 @app.route('/qr_image')
 def get_image():
     user_Id = session['id']
-    mycursor.execute("SELECT rep1,rep2,rep3,rep4,rep5,rep6,rep7,rep8 FROM tbl_user_medicalreport_images WHERE id = %s", (user_Id,))
+    print("User id :", user_Id)
+    type_id = type(user_Id)
+    if type_id == int:
+        temp_list = []
+        temp_list.append(user_Id)
+        user_Id = tuple(temp_list)
+    elif type_id == tuple:
+        pass
+    mycursor.execute("SELECT rep1,rep2,rep3,rep4,rep5,rep6,rep7,rep8 FROM tbl_user_medicalreport_images WHERE id = %s",
+                     (user_Id))
     blob_data_list = []
+
     for row in mycursor.fetchall():
-        for i in range(0,7):
-            base64_blob_data = base64.b64encode(row[i]).decode('utf-8')
-            blob_data_list.append(base64_blob_data)
+        # print(row)
+        for i in range(0, 7):
+            if row[i] is not None:
+                base64_blob_data = base64.b64encode(row[i]).decode('utf-8')
+                blob_data_list.append(base64_blob_data)
+
+    # getcontentimage()
 
     return render_template('qrshare.html', blob_data_list=blob_data_list)
 
@@ -244,13 +261,132 @@ def uploads():
         rep8=%s where id=%s'''
         user_id = session['id']
 
-        print("User_id",user_id)
+        print("User_id", user_id)
         val = (image_data1, image_data2, image_data3, image_data4, image_data5, image_data6, image_data7,
                image_data8, user_id)
         mycursor.execute(sql, val)
         mydb.commit()
+        # creating qr for uploaded images
+        # fun_img_qr_get()
     return render_template('uploads.html')
 
 
+# Function to generate QR code for multiple image Blobs and store in MySQL
+def generate_and_store_multi_image_qr(image_blobs):
+    # Create QR code instance
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+
+    user_Id = session['id']
+    # Add image Blobs data to QR code
+    for blob_data in image_blobs:
+        qr.add_data(blob_data)
+
+    qr.make(fit=True)
+
+    # Generate QR code image
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Convert image to byte stream
+    img_byte_array = img.getvalue()
+
+    # Update existing record in MySQL with the new QR code image
+    mycursor.execute("UPDATE tbl_user_details SET qr_code = %s WHERE id = %s", (img_byte_array, user_Id))
+    print("Created qr successfully")
+    # Commit the transaction
+    mydb.commit()
+
+
+@app.route('/qr_code_')
+def fun_img_qr_get():
+    user_Id = session['id']
+    type_id = type(user_Id)
+    if type_id == int:
+        temp_list = [user_Id]
+        user_Id = tuple(temp_list)
+    elif type_id == tuple:
+        pass
+    mycursor.execute("SELECT rep1,rep2,rep3,rep4,rep5,rep6,rep7,rep8 FROM tbl_user_medicalreport_images WHERE id = %s",
+                     (user_Id))
+
+    image_blobs1 = []
+    for row in mycursor.fetchall():
+        # print(row)
+        for i in range(0, 7):
+            if row[i] is not None:
+                base64_blob_data = base64.b64encode(row[i]).decode('utf-8')
+                image_blobs1.append(base64_blob_data)
+    # Convert Blob image data from base64 to bytes
+    print(image_blobs1)
+
+    # Update Blob data decoding with error handling
+    image_blobs = []
+    for blob in image_blobs1:
+        try:
+            base64_blob_data = base64.b64decode(blob.split(',')[0])
+            image_blobs.append(base64_blob_data)
+        except IndexError:
+            print("Error: Unable to split blob data. Skipping...")
+
+    generate_and_store_multi_image_qr(image_blobs)
+
+
+"""
+# Function to generate QR code for multiple image Blobs
+def generate_multi_image_qr(image_blobs, qr_code_path):
+    # Create QR code instance
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+
+    # Add image Blobs data to QR code
+    for blob_data in image_blobs:
+        qr.add_data(blob_data)
+
+    qr.make(fit=True)
+
+    # Generate QR code image
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Save QR code image to file
+    img.save(qr_code_path)
+    print("Generated successfully")
+    return render_template('qrshare.html')
+
+
+def getcontentimage():
+    print("HElloooo")
+    user_Id = session['id']
+    print(user_Id)
+    image_blobs = []
+    mycursor.execute("SELECT rep1,rep2 FROM tbl_user_medicalreport_images WHERE id = %s",
+                     (user_Id,))
+    for row in mycursor.fetchall():
+        image_blobs.append(row)
+    # print("Image blob data : --->>>>",image_blobs)
+    # Convert Blob image data from base64 to bytes
+    image_blobs = [base64.b64decode(blob.split(',')[1]) for blob in image_blobs]
+    qr_code_path = "multi_image_qr.png"  # Name of the output QR code file
+    generate_multi_image_qr(image_blobs, qr_code_path)
+"""
+
 if __name__ == '__main__':
+    '''image_blobs = [
+        # Base64 encoded image data as Blob
+        "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4Q...",
+        "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4R..."
+        # Add more Blob image data as needed
+    ]
+
+    # Convert Blob image data from base64 to bytes
+    image_blobs = [base64.b64decode(blob.split(',')[1]) for blob in image_blobs]
+
+    qr_code_path = "multi_image_qr.png"'''
     app.run(debug=True)
