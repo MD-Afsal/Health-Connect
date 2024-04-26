@@ -17,7 +17,7 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 # global user_id
-global msg
+# global msg
 
 
 @app.route('/')
